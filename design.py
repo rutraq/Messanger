@@ -21,7 +21,7 @@ class Ui_Dialog(object):
         self.textEdit.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textEdit.setObjectName("textEdit")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setGeometry(QtCore.QRect(140, 200, 75, 23))
+        self.pushButton.setGeometry(QtCore.QRect(140, 200, 101, 41))
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(30, 30, 61, 31))
@@ -39,6 +39,7 @@ class Ui_Dialog(object):
         self.label_2.setObjectName("label_2")
         self.lineEdit = QtWidgets.QLineEdit(Dialog)
         self.lineEdit.setGeometry(QtCore.QRect(150, 120, 191, 31))
+        self.lineEdit.setText("")
         self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit.setObjectName("lineEdit")
 
