@@ -1,9 +1,8 @@
 from PyQt5 import Qt
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
-import design
+from forms import design
 import mainform
-import vk_api
 from easygui import msgbox
 
 
@@ -31,7 +30,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('Main')
-        pixmap = QPixmap('1.png')
+        pixmap = QPixmap('photos/1.png')
         self.label.setPixmap(pixmap)
 
 
