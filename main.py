@@ -18,6 +18,8 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
             vk_session.auth()
             vk = vk_session.get_api()
             vk.messages.send(domain="genek_orlov", message="Sosat")
+            self.mainform.show()
+            self.hide()
         except:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
 
