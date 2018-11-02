@@ -26,8 +26,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
             self.lineEdit.setText('')
 
     def check(self):
-        if self.textEdit.toPlainText() != '':
-            self.pushButton.setEnabled(True)
+
 
 
 
