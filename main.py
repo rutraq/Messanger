@@ -13,7 +13,7 @@ class Mainform(QtWidgets.QMainWindow, design.Ui_Dialog):
 
     def login(self):
         try:
-            vk_session = vk_api.VkApi(self.textEdit.toPlainText(), self.lineEdit.selectedText())
+            vk_session = vk_api.VkApi(self.textEdit.toPlainText(), self.lineEdit.Text())
             vk_session.auth()
             vk = vk_session.get_api()
             vk.messages.send(domain="genek_orlov", message="Sosat")
