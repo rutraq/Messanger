@@ -1,8 +1,7 @@
 from PyQt5 import Qt
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
-from forms import design
-import mainform
+from forms import design, mainform
 from easygui import msgbox
 
 
