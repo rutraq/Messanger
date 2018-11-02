@@ -25,12 +25,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
 
-    def check(self):
-        if self.textEdit.toPlainText() != '':
-            self.pushButton.setEnabled(True)
-        else:
-            self.pushButton.setEnabled(False)
-
 
 class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
     def __init__(self):
