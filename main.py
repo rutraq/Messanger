@@ -1,7 +1,8 @@
 from PyQt5 import Qt
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap
-from forms import design, mainform
+import design
+import mainform
 from easygui import msgbox
 
 
@@ -11,6 +12,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.setupUi(self)
         self.pushButton.clicked.connect(self.login)
         self.mainform = Mainform()
+        self.lineEdit.returnPressed.connect(self.check)
 
     def login(self):
         try:
@@ -22,6 +24,12 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         except:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
+
+    def check(self):
+        if self.textEdit.toPlainText() != '':
+            self.pushButton.setEnabled(True)
+        else:
+            self.pushButton.setEnabled(False)
 
 
 class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
