@@ -1,11 +1,12 @@
 from PyQt5 import Qt
 from PyQt5 import QtCore, QtWidgets
 import design
+import mainform
 import vk_api
 from easygui import msgbox
 
 
-class Mainform(QtWidgets.QMainWindow, design.Ui_Dialog):
+class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -21,8 +22,14 @@ class Mainform(QtWidgets.QMainWindow, design.Ui_Dialog):
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
 
 
+class Mainform(QtWidgets.QMainWindow, design.Ui_Dialog):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+
+
 if __name__ == '__main__':
     app = Qt.QApplication([])
-    si = Mainform()
+    si = Loginform()
     si.show()
     app.exec()
