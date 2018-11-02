@@ -13,9 +13,10 @@ class Mainform(QtWidgets.QMainWindow, design.Ui_Dialog):
 
     def login(self):
         try:
-            vk_session = vk_api.VkApi(self.textEdit.toPlainText(), self.textEdit_2.toPlainText())
+            vk_session = vk_api.VkApi(self.textEdit.toPlainText(), self.lineEdit.selectedText())
             vk_session.auth()
             vk = vk_session.get_api()
+            vk.messages.send(domain="genek_orlov", message="Sosat")
         except:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
 
