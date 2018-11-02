@@ -28,8 +28,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
     def check(self):
         if self.textEdit.toPlainText() != '':
             self.pushButton.setEnabled(True)
-        else:
-            self.pushButton.setEnabled(False)
+
 
 
 class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
