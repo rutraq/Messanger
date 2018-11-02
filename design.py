@@ -21,7 +21,7 @@ class Ui_Dialog(object):
         self.textEdit.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.textEdit.setObjectName("textEdit")
         self.pushButton = QtWidgets.QPushButton(Dialog)
-        self.pushButton.setEnabled(False)
+        self.pushButton.setEnabled(True)
         self.pushButton.setGeometry(QtCore.QRect(140, 200, 101, 41))
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(Dialog)
