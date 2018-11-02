@@ -1,6 +1,6 @@
-from PyQt5 import Qt
+from PyQt5 import Qt, QtGui
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 import design
 import mainform
 from easygui import msgbox
@@ -32,7 +32,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.setWindowTitle('Main')
         pixmap = QPixmap('photos/1.png')
         self.label.setPixmap(pixmap)
-
+        Icon: QIcon = QtGui.QIcon("photos/2.png")
+        self.pushButton_2.setIcon(Icon)
 
 if __name__ == '__main__':
     app = Qt.QApplication([])
