@@ -12,7 +12,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.setupUi(self)
         self.pushButton.clicked.connect(self.login)
         self.mainform = Mainform()
-        self.lineEdit.returnPressed(self.check)
 
     def login(self):
         try:
