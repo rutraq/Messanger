@@ -4,6 +4,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 import design
 import mainform
 from easygui import msgbox
+import vk_api
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -14,12 +15,16 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.mainform = Mainform()
 
     def login(self):
+        global vk
         try:
-            # vk_session = vk_api.VkApi(self.textEdit.toPlainText(), self.lineEdit.text())
-            # vk_session.auth()
-            # vk = vk_session.get_api()
-            self.mainform.show()
-            self.hide()
+            if (int(self.textEdit.toPlainText().__len__()) == 0) or (int(self.lineEdit.text().__len__()) == 0):
+                msgbox(msg="Введите данные", title="Login", ok_button="fuck go back")
+            else:
+                vk_session = vk_api.VkApi(self.textEdit.toPlainText(), self.lineEdit.text())
+                vk_session.auth()
+                vk = vk_session.get_api()
+                self.mainform.show()
+                self.hide()
         except:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
@@ -34,6 +39,12 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label.setPixmap(pixmap)
         Icon: QIcon = QtGui.QIcon("photos/2.png")
         self.pushButton_2.setIcon(Icon)
+        self.pushButton.clicked.connect(self.send)
+
+    def send(self):
+        if self.textEdit.toPlainText() != '':
+            vk.messages.send(message=self.textEdit.toPlainText(), domain='genek_orlov')
+            self.textEdit.setText('')
 
 
 if __name__ == '__main__':
