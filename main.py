@@ -35,6 +35,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         Icon: QIcon = QtGui.QIcon("photos/2.png")
         self.pushButton_2.setIcon(Icon)
 
+
 if __name__ == '__main__':
     app = Qt.QApplication([])
     si = Loginform()
