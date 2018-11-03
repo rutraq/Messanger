@@ -32,9 +32,6 @@ class Ui_Dialog(object):
         self.pushButton_2.setGeometry(QtCore.QRect(1070, 0, 41, 41))
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_3.setGeometry(QtCore.QRect(670, 190, 131, 31))
-        self.pushButton_3.setObjectName("pushButton_3")
         self.listView = QtWidgets.QListView(Dialog)
         self.listView.setGeometry(QtCore.QRect(0, 0, 321, 861))
         self.listView.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
@@ -43,7 +40,7 @@ class Ui_Dialog(object):
         self.pushButton_4.setGeometry(QtCore.QRect(0, 60, 301, 51))
         self.pushButton_4.setObjectName("pushButton_4")
         self.pushButton_5 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_5.setGeometry(QtCore.QRect(0, 180, 291, 51))
+        self.pushButton_5.setGeometry(QtCore.QRect(0, 110, 301, 51))
         self.pushButton_5.setObjectName("pushButton_5")
 
         self.retranslateUi(Dialog)
@@ -53,7 +50,6 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Отправить"))
-        self.pushButton_3.setText(_translate("Dialog", "PushButton"))
         self.pushButton_4.setText(_translate("Dialog", "PushButton"))
         self.pushButton_5.setText(_translate("Dialog", "PushButton"))
 

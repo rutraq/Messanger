@@ -5,6 +5,7 @@ import design
 import mainform
 from easygui import msgbox
 import vk_api
+from tkinter import *
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -45,7 +46,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
     def load(self):
         i = 0
         friends = vk.friends.get(count=5, fields='domain')
-        self.pushButton_3.setText(friends['items'][0]['last_name'])
+        self.pushButton_4.setText(friends['items'][0]['first_name'] + ' ' + friends['items'][0]['last_name'])
+        btn = Button(mainform, text="Hello")
+        btn.pack()
 
     def send(self):
         if self.textEdit.toPlainText() != '':
