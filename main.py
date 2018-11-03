@@ -1,5 +1,6 @@
 from PyQt5 import Qt, QtGui
 from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtGui import QPixmap, QIcon
 import design
 import mainform
@@ -43,12 +44,14 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.pushButton.clicked.connect(self.send)
         self.pushButton_2.clicked.connect(self.load)
 
+
     def load(self):
         i = 0
-        friends = vk.friends.get(count=5, fields='domain')
-        self.pushButton_4.setText(friends['items'][0]['first_name'] + ' ' + friends['items'][0]['last_name'])
-        btn = Button(mainform, text="Hello")
-        btn.pack()
+        friends = vk.friends.get(fields='domain', count=20)
+        while i < len(friends["items"]):
+            self.verticalLayout.addWidget(
+                QPushButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name']))
+            i += 1
 
     def send(self):
         if self.textEdit.toPlainText() != '':
