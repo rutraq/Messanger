@@ -44,11 +44,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
     def load(self):
         i = 0
-        list_friends = vk.friends.get(count=5, fields='domain')
-        friends = list()
-        while i < len(list_friends):
-            friends.append(list_friends['items'][i]['first_name'])
-        msgbox(msg=friends[0], title="Login", ok_button="fuck go back")
+        friends = vk.friends.get(count=5, fields='domain')
+        self.pushButton_3.setText(friends['items'][0]['last_name'])
 
     def send(self):
         if self.textEdit.toPlainText() != '':
