@@ -40,6 +40,15 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         Icon: QIcon = QtGui.QIcon("photos/2.png")
         self.pushButton_2.setIcon(Icon)
         self.pushButton.clicked.connect(self.send)
+        self.pushButton_2.clicked.connect(self.load)
+
+    def load(self):
+        i = 0
+        list_friends = vk.friends.get(count=5, fields='domain')
+        friends = list()
+        while i < len(list_friends):
+            friends.append(list_friends['items'][i]['first_name'])
+        msgbox(msg=friends[0], title="Login", ok_button="fuck go back")
 
     def send(self):
         if self.textEdit.toPlainText() != '':
