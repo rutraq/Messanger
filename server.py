@@ -1,33 +1,21 @@
-import socket, time
+import socket
 
-host = socket.gethostbyname(socket.gethostname())
-port = 9090
+serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
+serv_sock.bind(('', 53210))
+serv_sock.listen(10)
 
-clients = []
+while True:
+    # Бесконечно обрабатываем входящие подключения
+    client_sock, client_addr = serv_sock.accept()
+    print('Connected by', client_addr)
 
-s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-s.bind((host, port))
+    while True:
+        # Пока клиент не отключился, читаем передаваемые
+        # им данные и отправляем их обратно
+        data = client_sock.recv(1024)
+        if not data:
+            # Клиент отключился
+            break
+        client_sock.sendall(data)
 
-quit = False
-print("[ Server Started ]")
-
-while not quit:
-    try:
-        data, addr = s.recvfrom(1024)
-
-        if addr not in clients:
-            clients.append(addr)
-
-        itsatime = time.strftime("%Y-%m-%d-%H.%M.%S", time.localtime())
-
-        print("[" + addr[0] + "]=[" + str(addr[1]) + "]=[" + itsatime + "]/", end="")
-        print(data.decode("utf-8"))
-
-        for client in clients:
-            if addr != client:
-                s.sendto(data, client)
-    except:
-        print("\n[ Server Stopped ]")
-        quit = True
-
-s.close()
+    client_sock.close()
