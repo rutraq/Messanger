@@ -6,7 +6,6 @@ import design
 import mainform
 from easygui import msgbox
 import vk_api
-from tkinter import *
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -57,7 +56,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             btn.setText(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
             self.verticalLayout.addWidget(btn)
             i += 1
-        list_friends[0].clicked.connect(lambda : print(list_friends[0].text()))
+        i = 0
+        for i in range(len(list_friends)):
+            list_friends[i].clicked.connect(lambda: print(list_friends[i].text()))
 
     def on_click(self):
         msgbox(msg=self.verticalLayout.widget('btn'))
