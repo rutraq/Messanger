@@ -47,21 +47,13 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
     def load(self):
         list_friends = []
         friends = vk.friends.get(fields='domain', count=20)
-        i = 0
-        while i < len(friends["items"]):
-            list_friends.append(QPushButton("Clicker"))
-            i += 1
-        i = 0
-        for btn in list_friends:
-            btn.setText(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
-            self.verticalLayout.addWidget(btn)
-            i += 1
-        i = 0
-        for i in range(len(list_friends)):
-            list_friends[i].clicked.connect(lambda: print(list_friends[i].text()))
-
-    def on_click(self):
-        msgbox(msg=self.verticalLayout.widget('btn'))
+        # i = 0
+        # while i < len(friends["items"]):
+        #     self.button = QPushButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
+        #     self.button.clicked.connect(lambda: self.button.setEnabled(False))
+        #     list_friends.append(self.button)
+        #     self.verticalLayout.addWidget(self.button)
+        #     i += 1
 
     def send(self):
         if self.textEdit.toPlainText() != '':
