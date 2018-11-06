@@ -40,26 +40,12 @@ class Ui_Dialog(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(7)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.toolBox = QtWidgets.QToolBox(Dialog)
-        self.toolBox.setGeometry(QtCore.QRect(490, 130, 151, 281))
-        self.toolBox.setObjectName("toolBox")
-        self.page = QtWidgets.QWidget()
-        self.page.setGeometry(QtCore.QRect(0, 0, 151, 219))
-        self.page.setObjectName("page")
-        self.toolBox.addItem(self.page, "")
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setGeometry(QtCore.QRect(0, 0, 1061, 769))
-        self.page_2.setObjectName("page_2")
-        self.toolBox.addItem(self.page_2, "")
 
         self.retranslateUi(Dialog)
-        self.toolBox.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Отправить"))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.page), _translate("Dialog", "Page 1"))
-        self.toolBox.setItemText(self.toolBox.indexOf(self.page_2), _translate("Dialog", "Page 2"))
 

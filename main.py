@@ -1,11 +1,14 @@
 from PyQt5 import Qt, QtGui
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton, QRadioButton
 from PyQt5.QtGui import QPixmap, QIcon
 import design
 import mainform
 from easygui import msgbox
 import vk_api
+
+list_friends = []
+domains = []
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -45,20 +48,29 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.pushButton_2.clicked.connect(self.load)
 
     def load(self):
-        list_friends = []
-        friends = vk.friends.get(fields='domain', count=20)
-        # i = 0
-        # while i < len(friends["items"]):
-        #     self.button = QPushButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
-        #     self.button.clicked.connect(lambda: self.button.setEnabled(False))
-        #     list_friends.append(self.button)
-        #     self.verticalLayout.addWidget(self.button)
-        #     i += 1
+        friends = vk.friends.get(fields='domain')
+        i = 0
+        while i < len(friends["items"]):
+            self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
+            list_friends.append(self.check)
+            domains.append(friends['items'][i]['domain'])
+            self.verticalLayout.addWidget(self.check)
+            i += 1
 
     def send(self):
-        if self.textEdit.toPlainText() != '':
-            vk.messages.send(message=self.textEdit.toPlainText(), domain='genek_orlov')
-            self.textEdit.setText('')
+        i = 0
+        choose_friends = 0
+        for check in list_friends:
+            if check.isChecked():
+                choose_friends = 1
+                if self.textEdit.toPlainText() != '':
+                    vk.messages.send(message=self.textEdit.toPlainText(), domain=domains[i])
+                    self.textEdit.setText('')
+                else:
+                    msgbox(msg="Enter a message", title="ERROR")
+            i += 1
+        if choose_friends == 0:
+            msgbox(msg="Choose a friend", title="ERROR")
 
 
 if __name__ == '__main__':
