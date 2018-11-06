@@ -48,7 +48,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.pushButton_2.clicked.connect(self.load)
 
     def load(self):
-        friends = vk.friends.get(fields='domain')
+        friends = vk.friends.get(fields='domain', count=20)
         i = 0
         while i < len(friends["items"]):
             self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
