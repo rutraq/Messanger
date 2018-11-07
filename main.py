@@ -9,6 +9,7 @@ import vk_api
 
 list_friends = []
 domains = []
+messages = []
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -39,13 +40,14 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowTitle('Main')
+        self.setWindowTitle('Povistochka')
         pixmap = QPixmap('photos/1.png')
         self.label.setPixmap(pixmap)
         Icon: QIcon = QtGui.QIcon("photos/2.png")
         self.pushButton_2.setIcon(Icon)
         self.pushButton.clicked.connect(self.send)
         self.pushButton_2.clicked.connect(self.load)
+        self.setWindowIcon(QIcon('photos/logo.png'))
 
     def load(self):
         friends = vk.friends.get(fields='domain', count=20)
@@ -60,12 +62,18 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
     def send(self):
         i = 0
         choose_friends = 0
+        text = ''
         for check in list_friends:
             if check.isChecked():
                 choose_friends = 1
                 if self.textEdit.toPlainText() != '':
                     vk.messages.send(message=self.textEdit.toPlainText(), domain=domains[i])
+                    messages.append(self.textEdit.toPlainText())
                     self.textEdit.setText('')
+                    for mess in messages:
+                        text += mess + '''
+'''
+                    self.plainTextEdit.setPlainText(text)
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
             i += 1
