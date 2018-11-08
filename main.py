@@ -39,8 +39,12 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 cur = conn.cursor()
                 res = cur.execute("SELECT * FROM users")
                 row = cur.fetchone()
-                res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",(domain,name,surname))  # Добавление информации
-                conn.commit()
+                res = cur.execute("SELECT * FROM users WHERE DOMAIN ='genek_orlov'")
+                row = cur.fetchone()
+                if not row:
+                    res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
+                                      (domain, name, surname))  # Добавление информации
+                    conn.commit()
 
                 self.mainform.show()
                 self.hide()

@@ -23,3 +23,25 @@ for entry in cur:
     print(entry)
 
 conn.close() # Разрываем подключение.
+
+
+
+# import psycopg2
+# try:
+#     conn = psycopg2.connect("dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+#     print("подключился к базе данных")
+# except:
+#     print("не подключился к базе данных")
+# #a = str(input("Введите domain для поиска :"))
+# cur = conn.cursor()
+# #res = cur.execute("SELECT * FROM users")
+# res = cur.execute("SELECT * FROM users WHERE DOMAIN ='arturdesmond'")
+# row = cur.fetchone()
+# if not row:
+#     print('не найдено')
+# else:
+#     print('найдено')
+#
+# res = cur.execute("SELECT * FROM users")
+# row = cur.fetchone()
+# print(row)
