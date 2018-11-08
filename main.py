@@ -47,6 +47,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 if not row:
                     res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
                                       (domain, name, surname))  # Добавление информации
+                    conn.commit()
 
                 self.mainform.show()
                 self.hide()
