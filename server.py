@@ -1,22 +1,21 @@
-import socket
+import psycopg2
+try:
+    conn = psycopg2.connect("dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+    print("подключился к базе данных")
+except:
+    print("не подключился к базе данных")
+a = str(input("Введите имя для поиска "))
+cur = conn.cursor()
+res = cur.execute("SELECT * FROM users domain where lower(domain) like lower('%Desmond%')") #поиск информации
+#res = cur.execute("SELECT * FROM users")
+row = cur.fetchone()
+print(row)        # Вывод информации с мансами
+for entry in cur: #
+    print(entry)  #
 
-serv_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM, proto=0)
-serv_sock.bind(('', 53210))
-serv_sock.listen(10)
+#print(row) #простой вывод
 
-while True:
-    # Бесконечно обрабатываем входящие подключения
-    client_sock, client_addr = serv_sock.accept()
-    print('Connected by', client_addr)
+#res = cur.execute("INSERT INTO users(count ,domain ,name ,surname) VALUES (%s,%s,%s,%s)", ("2", "DESMOND", "ARTUR", "Youzefovich"))  #Добавление информации
+#conn.commit()
 
-    while True:
-        # Пока клиент не отключился, читаем передаваемые
-        # им данные и отправляем их обратно
-        data = client_sock.recv(1024)
-        print(data)
-        if not data:
-            # Клиент отключился
-            break
-        client_sock.sendall(data)
-
-    client_sock.close()
+conn.close() # Разрываем подключение.
