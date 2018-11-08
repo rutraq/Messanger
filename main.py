@@ -89,8 +89,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     messages.append(self.textEdit.toPlainText())
                     self.textEdit.setText('')
                     for mess in messages:
-                        text += mess + '''
-'''
+                        text += mess + "\n"
                     self.plainTextEdit.setPlainText(text)
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
