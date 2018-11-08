@@ -32,22 +32,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 vk_session.auth()
                 vk = vk_session.get_api()
 
-                # info = vk.account.getProfileInfo()
-                # name = info['first_name']
-                # surname = info['last_name']
-                # domain = info['screen_name']
-                #
-                # conn = psycopg2.connect(
-                #     "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-                # cur = conn.cursor()
-                # res = cur.execute("SELECT * FROM users")
-                # row = cur.fetchone()
-                # res = cur.execute("SELECT * FROM users WHERE DOMAIN =arturdesmond")
-                # row = cur.fetchone()
-                # if not row:
-                #     res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
-                #                       (domain, name, surname))  # Добавление информации
-
                 self.mainform.show()
                 self.hide()
         except:
@@ -66,6 +50,22 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.pushButton.clicked.connect(self.send)
         self.pushButton_2.clicked.connect(self.load)
         self.setWindowIcon(QIcon('photos/logo.png'))
+
+        info = vk.account.getProfileInfo()
+        name = info['first_name']
+        surname = info['last_name']
+        domain = info['screen_name']
+
+        conn = psycopg2.connect(
+            "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+        cur = conn.cursor()
+        res = cur.execute("SELECT * FROM users")
+        row = cur.fetchone()
+        res = cur.execute("SELECT * FROM users WHERE DOMAIN = '" + domain + "' ")
+        row = cur.fetchone()
+        if not row:
+            res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
+                              (domain, name, surname))  # Добавление информации
 
     def load(self):
         friends = vk.friends.get(fields='domain', count=20)
