@@ -39,7 +39,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 cur = conn.cursor()
                 res = cur.execute("SELECT * FROM users")
                 row = cur.fetchone()
-                res = cur.execute("SELECT * FROM users WHERE DOMAIN ='genek_orlov'")
+                res = cur.execute("SELECT * FROM users WHERE DOMAIN =''",domain)
                 row = cur.fetchone()
                 if not row:
                     res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
