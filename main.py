@@ -19,6 +19,8 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.setupUi(self)
         self.pushButton.clicked.connect(self.login)
         self.mainform = Mainform()
+        self.setWindowTitle("Povistochka")
+        self.setWindowIcon(QIcon("photos/logo.png"))
 
     def login(self):
         global vk
@@ -30,21 +32,21 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 vk_session.auth()
                 vk = vk_session.get_api()
 
-                info = vk.account.getProfileInfo()
-                name = info['first_name']
-                surname = info['last_name']
-                domain = info['screen_name']
-
-                conn = psycopg2.connect("dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-                cur = conn.cursor()
-                res = cur.execute("SELECT * FROM users")
-                row = cur.fetchone()
-                res = cur.execute("SELECT * FROM users WHERE DOMAIN =''",domain)
-                row = cur.fetchone()
-                if not row:
-                    res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
-                                      (domain, name, surname))  # Добавление информации
-                    conn.commit()
+                # info = vk.account.getProfileInfo()
+                # name = info['first_name']
+                # surname = info['last_name']
+                # domain = info['screen_name']
+                #
+                # conn = psycopg2.connect(
+                #     "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+                # cur = conn.cursor()
+                # res = cur.execute("SELECT * FROM users")
+                # row = cur.fetchone()
+                # res = cur.execute("SELECT * FROM users WHERE DOMAIN =arturdesmond")
+                # row = cur.fetchone()
+                # if not row:
+                #     res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
+                #                       (domain, name, surname))  # Добавление информации
 
                 self.mainform.show()
                 self.hide()
@@ -59,8 +61,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('Povistochka')
-        pixmap = QPixmap('photos/1.png')
-        self.label.setPixmap(pixmap)
         Icon: QIcon = QtGui.QIcon("photos/2.png")
         self.pushButton_2.setIcon(Icon)
         self.pushButton.clicked.connect(self.send)
@@ -96,6 +96,27 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             i += 1
         if choose_friends == 0:
             msgbox(msg="Choose a friend", title="ERROR")
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_Enter:
+            i = 0
+            choose_friends = 0
+            text = ''
+            for check in list_friends:
+                if check.isChecked():
+                    choose_friends = 1
+                    if self.textEdit.toPlainText() != '':
+                        vk.messages.send(message=self.textEdit.toPlainText(), domain=domains[i])
+                        messages.append(self.textEdit.toPlainText())
+                        self.textEdit.setText('')
+                        for mess in messages:
+                            text += mess + "\n"
+                        self.plainTextEdit.setPlainText(text)
+                    else:
+                        msgbox(msg="Enter a message", title="ERROR")
+                i += 1
+            if choose_friends == 0:
+                msgbox(msg="Choose a friend", title="ERROR")
 
 
 if __name__ == '__main__':
