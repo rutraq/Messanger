@@ -11,7 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(365, 301)
+        Dialog.resize(365, 286)
+        Dialog.setAutoFillBackground(True)
+        Dialog.setStyleSheet("background-image: url(:/newPrefix/konvert.png);")
         self.textEdit = QtWidgets.QTextEdit(Dialog)
         self.textEdit.setGeometry(QtCore.QRect(150, 30, 191, 31))
         font = QtGui.QFont()
@@ -25,7 +27,7 @@ class Ui_Dialog(object):
         self.pushButton.setGeometry(QtCore.QRect(140, 200, 101, 41))
         self.pushButton.setObjectName("pushButton")
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(30, 30, 61, 31))
+        self.label.setGeometry(QtCore.QRect(20, 30, 61, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(14)
@@ -54,3 +56,4 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "Login:"))
         self.label_2.setText(_translate("Dialog", "Password:"))
 
+import new_rc
