@@ -3,7 +3,6 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QPushButton, QRadioButton
 from PyQt5.QtGui import QPixmap, QIcon
 import design
-import new_rc
 import mainform
 from easygui import msgbox
 import vk_api
@@ -22,7 +21,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.mainform = Mainform()
         self.setWindowTitle("Povistochka")
         self.setWindowIcon(QIcon("photos/logo.png"))
-        self.lineEdit.returnPressed.connect(self.login)
 
     def login(self):
         global vk
@@ -64,10 +62,12 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('Povistochka')
+        Icon: QIcon = QtGui.QIcon("photos/2.png")
+        self.pushButton_2.setIcon(Icon)
         self.pushButton.clicked.connect(self.send)
         self.pushButton_2.clicked.connect(self.load)
         self.setWindowIcon(QIcon('photos/logo.png'))
-        self.lineEdit.returnPressed.connect(self.send)
+        self.lineEdit.returnPressed.connect(self.key_press)
 
     def load(self):
         friends = vk.friends.get(fields='domain', count=20)
@@ -80,6 +80,26 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             i += 1
 
     def send(self):
+        i = 0
+        choose_friends = 0
+        text = ''
+        for check in list_friends:
+            if check.isChecked():
+                choose_friends = 1
+                if self.lineEdit.text() != '':
+                    vk.messages.send(message=self.lineEdit.text(), domain=domains[i])
+                    messages.append(self.lineEdit.text())
+                    self.lineEdit.setText('')
+                    for mess in messages:
+                        text += mess + "\n"
+                    self.plainTextEdit.setPlainText(text)
+                else:
+                    msgbox(msg="Enter a message", title="ERROR")
+            i += 1
+        if choose_friends == 0:
+            msgbox(msg="Choose a friend", title="ERROR")
+
+    def key_press(self):
         i = 0
         choose_friends = 0
         text = ''
