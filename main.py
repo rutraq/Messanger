@@ -64,9 +64,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         Icon: QIcon = QtGui.QIcon("photos/2.png")
         self.pushButton_2.setIcon(Icon)
         self.pushButton.clicked.connect(self.send)
-        self.pushButton_2.clicked.connect(self.load)
         self.setWindowIcon(QIcon('photos/logo.png'))
         self.lineEdit.returnPressed.connect(self.key_press)
+        self.load()
 
     def load(self):
         friends = vk.friends.get(fields='domain', count=20)
