@@ -50,7 +50,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 self.mainform = Mainform()
                 self.mainform.show()
                 self.hide()
-        except:
+        except vk_api.exceptions.BadPassword:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
 
@@ -61,8 +61,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle('Povistochka')
-        Icon: QIcon = QtGui.QIcon("photos/2.png")
-        self.pushButton_2.setIcon(Icon)
         self.pushButton.clicked.connect(self.send)
         self.setWindowIcon(QIcon('photos/logo.png'))
         self.lineEdit.returnPressed.connect(self.key_press)
