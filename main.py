@@ -7,6 +7,7 @@ import mainform
 from easygui import msgbox
 import vk_api
 import psycopg2
+import requests
 
 list_friends = []
 domains = []
@@ -53,6 +54,9 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 self.hide()
         except vk_api.exceptions.BadPassword:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
+            self.lineEdit.setText('')
+        except requests.exceptions.ConnectionError:
+            msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
 
 
