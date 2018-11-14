@@ -21,7 +21,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.mainform = Mainform()
         self.setWindowTitle("Povistochka")
         self.setWindowIcon(QIcon("photos/logo.png"))
-        self.pushButton.setToolTip("Jenya pidor")
 
     def login(self):
         global vk
