@@ -11,7 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(386, 285)
+        Dialog.resize(384, 291)
+        Dialog.setMinimumSize(QtCore.QSize(384, 291))
+        Dialog.setMaximumSize(QtCore.QSize(384, 291))
         Dialog.setAutoFillBackground(False)
         Dialog.setStyleSheet("background-image: url(:/newPrefix/photos/konvert.jpg);")
         self.textEdit = QtWidgets.QTextEdit(Dialog)

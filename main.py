@@ -18,7 +18,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         super().__init__()
         self.setupUi(self)
         self.pushButton.clicked.connect(self.login)
-        self.mainform = Mainform()
         self.setWindowTitle("Povistochka")
         self.setWindowIcon(QIcon("photos/logo.png"))
 
@@ -48,7 +47,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                     res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
                                       (domain, name, surname))  # Добавление информации
                     conn.commit()
-
+                self.mainform = Mainform()
                 self.mainform.show()
                 self.hide()
         except:
