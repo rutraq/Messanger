@@ -68,14 +68,23 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.load()
 
     def load(self):
-        friends = vk.friends.get(fields='domain', count=20)
-        i = 0
-        while i < len(friends["items"]):
-            self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
-            list_friends.append(self.check)
-            domains.append(friends['items'][i]['domain'])
-            self.verticalLayout.addWidget(self.check)
-            i += 1
+        conn = psycopg2.connect(
+            "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+        cur = conn.cursor()
+        res = cur.execute("SELECT name FROM users")
+        row = cur.fetchone()
+        name = row
+        self.check = QRadioButton(str(name)[2:-3])
+        self.verticalLayout.addWidget(self.check)
+
+        # friends = vk.friends.get(fields='domain')
+        # i = 0
+        # while i < len(friends["items"]):
+        #     self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
+        #     list_friends.append(self.check)
+        #     domains.append(friends['items'][i]['domain'])
+        #     self.verticalLayout.addWidget(self.check)
+        #     i += 1
 
     def send(self):
         i = 0
