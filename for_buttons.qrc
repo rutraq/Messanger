@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>photos/prozrach.png</file>
+    <file>photos/icon_for_all.png</file>
+  </qresource>
+</RCC>
