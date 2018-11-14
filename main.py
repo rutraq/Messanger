@@ -3,8 +3,6 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QPushButton, QRadioButton
 from PyQt5.QtGui import QPixmap, QIcon
 import design
-import icon_rc
-import for_buttons_rc
 import mainform
 from easygui import msgbox
 import vk_api
