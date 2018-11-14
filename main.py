@@ -20,6 +20,7 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.pushButton.clicked.connect(self.login)
         self.setWindowTitle("Povistochka")
         self.setWindowIcon(QIcon("photos/logo.png"))
+        self.lineEdit.returnPressed.connect(self.login)
 
     def login(self):
         global vk
