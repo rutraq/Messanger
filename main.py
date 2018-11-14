@@ -74,7 +74,10 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         res = cur.execute("SELECT name FROM users")
         row = cur.fetchone()
         name = row
-        self.check = QRadioButton(str(name)[2:-3])
+        res = cur.execute("SELECT surname FROM users")
+        row = cur.fetchone()
+        surname = row
+        self.check = QRadioButton(str(name)[2:-3]+' '+str(surname)[2:-3])
         self.verticalLayout.addWidget(self.check)
 
         # friends = vk.friends.get(fields='domain')
