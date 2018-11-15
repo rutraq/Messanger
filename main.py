@@ -86,24 +86,23 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         cur = conn.cursor()
         res = cur.execute("SELECT * FROM users")
         row = cur.fetchone()
-        print(row)
+        name_button = str(row[2])
+        surname_button = str(row[3])
+        self.check = QRadioButton(name_button + ' ' + surname_button)
+        self.verticalLayout.addWidget(self.check)
+
         for entry in cur:
-            print(entry)
+            name_button = str(entry[2])
+            surname_button = str(entry[3])
+            self.check = QRadioButton(name_button + ' ' + surname_button)
+            self.verticalLayout.addWidget(self.check)
+
         res = cur.execute("SELECT * FROM users WHERE DOMAIN = '" + domain + "' ")
         row = cur.fetchone()
         if not row:
             res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
                               (domain, name, surname))  # Добавление информации
             conn.commit()
-
-        res = cur.execute("SELECT name, surname FROM users")
-        row = cur.fetchone()
-        self.check = QRadioButton(str(row))
-        self.verticalLayout.addWidget(self.check)
-
-        for entry in cur:
-            self.check = QRadioButton(str(entry))
-            self.verticalLayout.addWidget(self.check)
 
         # friends = vk.friends.get(fields='domain', count=20)
         # i = 0
