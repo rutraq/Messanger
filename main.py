@@ -8,6 +8,8 @@ from easygui import msgbox
 import vk_api
 import psycopg2
 import requests
+import os
+from time import sleep
 
 list_friends = []
 domains = []
@@ -52,6 +54,13 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 self.mainform = Mainform()
                 self.mainform.show()
                 self.hide()
+                if self.checkBox.isChecked():
+                    f = open("sign.txt", "w")
+                    f.write(self.textEdit.toPlainText() + "\n" + self.lineEdit.text().__len__())
+                    f.close()
+                else:
+                    os.remove("vk_config.v2.json")
+                    os.remove("sign.txt")
         except vk_api.exceptions.BadPassword:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
@@ -72,26 +81,26 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.load()
 
     def load(self):
-        conn = psycopg2.connect(
-            "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-        cur = conn.cursor()
-        res = cur.execute("SELECT name FROM users")
-        row = cur.fetchone()
-        name = row
-        res = cur.execute("SELECT surname FROM users")
-        row = cur.fetchone()
-        surname = row
-        self.check = QRadioButton(str(name)[2:-3]+' '+str(surname)[2:-3])
-        self.verticalLayout.addWidget(self.check)
+        # conn = psycopg2.connect(
+        #     "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+        # cur = conn.cursor()
+        # res = cur.execute("SELECT name FROM users")
+        # row = cur.fetchone()
+        # name = row
+        # res = cur.execute("SELECT surname FROM users")
+        # row = cur.fetchone()
+        # surname = row
+        # self.check = QRadioButton(str(name)[2:-3]+' '+str(surname)[2:-3])
+        # self.verticalLayout.addWidget(self.check)
 
-        # friends = vk.friends.get(fields='domain')
-        # i = 0
-        # while i < len(friends["items"]):
-        #     self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
-        #     list_friends.append(self.check)
-        #     domains.append(friends['items'][i]['domain'])
-        #     self.verticalLayout.addWidget(self.check)
-        #     i += 1
+        friends = vk.friends.get(fields='domain', count=20)
+        i = 0
+        while i < len(friends["items"]):
+            self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
+            list_friends.append(self.check)
+            domains.append(friends['items'][i]['domain'])
+            self.verticalLayout.addWidget(self.check)
+            i += 1
 
     def send(self):
         i = 0
