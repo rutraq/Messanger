@@ -9,7 +9,6 @@ import vk_api
 import psycopg2
 import requests
 import os
-from time import sleep
 
 list_friends = []
 domains = []
@@ -24,6 +23,16 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.setWindowTitle("Povistochka")
         self.setWindowIcon(QIcon("photos/logo.png"))
         self.lineEdit.returnPressed.connect(self.login)
+        self.load_form()
+
+    def load_form(self):
+        if os.path.isfile("sign.txt"):
+            f = open("sign.txt")
+            telephone = f.read()
+            f.close()
+            self.textEdit.setText(telephone)
+            self.lineEdit.setText("11111111111")
+            self.checkBox.setChecked(True)
 
     def login(self):
         global vk
@@ -38,13 +47,14 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 self.mainform = Mainform()
                 self.mainform.show()
                 self.hide()
-                # if self.checkBox.isChecked():
-                #     f = open("sign.txt", "w")
-                #     f.write(self.textEdit.toPlainText() + "\n" + self.lineEdit.text().__len__())
-                #     f.close()
-                # else:
-                #     os.remove("vk_config.v2.json")
-                #     os.remove("sign.txt")
+                if self.checkBox.isChecked():
+                    f = open("sign.txt", "w")
+                    f.write(str(self.textEdit.toPlainText()))
+                    f.close()
+                else:
+                    os.remove("vk_config.v2.json")
+                    if os.path.isfile("sign.txt"):
+                        os.remove("sign.txt")
         except vk_api.exceptions.BadPassword:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')

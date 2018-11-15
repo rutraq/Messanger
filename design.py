@@ -58,7 +58,7 @@ class Ui_Dialog(object):
         self.lineEdit.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit.setObjectName("lineEdit")
         self.checkBox = QtWidgets.QCheckBox(Dialog)
-        self.checkBox.setGeometry(QtCore.QRect(110, 130, 171, 20))
+        self.checkBox.setGeometry(QtCore.QRect(160, 130, 171, 20))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
