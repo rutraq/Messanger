@@ -84,7 +84,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         conn = psycopg2.connect(
             "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
         cur = conn.cursor()
-        res = cur.execute("SELECT * FROM users")
+        res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
         name_button = str(row[2])
         surname_button = str(row[3])
