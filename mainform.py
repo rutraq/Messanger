@@ -47,6 +47,7 @@ class Ui_Dialog(object):
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setGeometry(QtCore.QRect(0, 0, 41, 41))
+        self.pushButton_2.setStyleSheet("background-image: url(:/newPrefix/photos/polos.jpg);")
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
 
@@ -58,3 +59,4 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Отправить"))
 
+import main_form_rc

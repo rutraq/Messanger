@@ -109,11 +109,16 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/newPrefix/photos/polos.jpg);</string>
+   </property>
    <property name="text">
     <string/>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="main_form.qrc"/>
+ </resources>
  <connections/>
 </ui>
