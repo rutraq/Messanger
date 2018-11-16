@@ -29,24 +29,6 @@
     <string>Отправить</string>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>80</y>
-     <width>321</width>
-     <height>781</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>7</number>
-    </property>
-    <property name="sizeConstraint">
-     <enum>QLayout::SetDefaultConstraint</enum>
-    </property>
-   </layout>
-  </widget>
   <widget class="QPlainTextEdit" name="plainTextEdit">
    <property name="enabled">
     <bool>true</bool>
