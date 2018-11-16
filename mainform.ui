@@ -105,12 +105,12 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>41</width>
-     <height>41</height>
+     <width>51</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/newPrefix/photos/polos.jpg);</string>
+    <string notr="true">background-image: url(:/newPrefix/photos/menu.png);</string>
    </property>
    <property name="text">
     <string/>

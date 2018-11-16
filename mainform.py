@@ -46,8 +46,8 @@ class Ui_Dialog(object):
         self.lineEdit.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
-        self.pushButton_2.setGeometry(QtCore.QRect(0, 0, 41, 41))
-        self.pushButton_2.setStyleSheet("background-image: url(:/newPrefix/photos/polos.jpg);")
+        self.pushButton_2.setGeometry(QtCore.QRect(0, 0, 51, 51))
+        self.pushButton_2.setStyleSheet("background-image: url(:/newPrefix/photos/menu.png);")
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
 
