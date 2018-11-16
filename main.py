@@ -97,15 +97,16 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         name_button = str(row[2])
         surname_button = str(row[3])
         check = QRadioButton(name_button + ' ' + surname_button, self)
-        # self.verticalLayout.addWidget(self.check)
-        check.resize(200, 100)
-        check.move(100, 200)
-
+        check.resize(200, 20)
+        check.move(10, 70)
+        i = 90
         for entry in cur:
             name_button = str(entry[2])
             surname_button = str(entry[3])
-            self.check = QRadioButton(name_button + ' ' + surname_button)
-            self.verticalLayout.addWidget(self.check)
+            check = QRadioButton(name_button + ' ' + surname_button, self)
+            check.resize(200, 20)
+            check.move(10, i)
+            i += 20
 
     def send(self):
         i = 0
