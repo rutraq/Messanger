@@ -13,6 +13,7 @@ import os
 list_friends = []
 domains = []
 messages = []
+count = 0;
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -70,9 +71,18 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.setupUi(self)
         self.setWindowTitle('Povistochka')
         self.pushButton.clicked.connect(self.send)
+        self.pushButton_2.clicked.connect(self.click)
         self.setWindowIcon(QIcon('photos/logo.png'))
         self.lineEdit.returnPressed.connect(self.key_press)
         self.load()
+
+    def click(self):
+        global count
+        count+=1
+        if (count % 2 ==1):
+            self.listView_2.show()
+        else:
+            self.listView_2.hide()
 
     def load(self):
 
