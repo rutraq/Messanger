@@ -84,6 +84,14 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         conn = psycopg2.connect(
             "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
         cur = conn.cursor()
+        res = cur.execute("SELECT * FROM users WHERE DOMAIN = '" + domain + "' ")
+        row = cur.fetchone()
+
+        if not row:
+            res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
+                              (domain, name, surname))  # Добавление информации
+            conn.commit()
+
         res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
         name_button = str(row[2])
@@ -97,21 +105,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             self.check = QRadioButton(name_button + ' ' + surname_button)
             self.verticalLayout.addWidget(self.check)
 
-        res = cur.execute("SELECT * FROM users WHERE DOMAIN = '" + domain + "' ")
-        row = cur.fetchone()
-        if not row:
-            res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
-                              (domain, name, surname))  # Добавление информации
-            conn.commit()
-
-        # friends = vk.friends.get(fields='domain', count=20)
-        # i = 0
-        # while i < len(friends["items"]):
-        #     self.check = QRadioButton(friends['items'][i]['first_name'] + ' ' + friends['items'][i]['last_name'])
-        #     list_friends.append(self.check)
-        #     domains.append(friends['items'][i]['domain'])
-        #     self.verticalLayout.addWidget(self.check)
-        #     i += 1
 
     def send(self):
         i = 0
