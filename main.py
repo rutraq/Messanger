@@ -91,6 +91,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         surname = info['last_name']
         domain = info['screen_name']
 
+        self.listView_2.hide()
+
         conn = psycopg2.connect(
             "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
         cur = conn.cursor()
