@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="newPrefix">
+    <file>photos/menu.png</file>
+    <file>photos/menu.png</file>
+    <file>photos/menu.png</file>
+    <file>photos/users.png</file>
     <file>photos/prozrach.png</file>
     <file>photos/menu.png</file>
     <file>photos/polos.jpg</file>

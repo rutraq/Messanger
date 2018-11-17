@@ -72,6 +72,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.setWindowTitle('Povistochka')
         self.pushButton.clicked.connect(self.send)
         self.pushButton_2.clicked.connect(self.click)
+        self.pushButton_3.clicked.connect(self.hide_button)
         self.setWindowIcon(QIcon('photos/logo.png'))
         self.lineEdit.returnPressed.connect(self.key_press)
         self.load()
@@ -81,11 +82,22 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         name = info['first_name']
         surname = info['last_name']
         self.listView_2.move(0, 0)
-        self.label.move(25, 70)
+        self.label.move(0, 100)
         self.label_2.move(100, 20)
         self.label.setText(name + ' ' + surname)
         for btn in list_friends:
             btn.hide()
+        self.pushButton_3.move(260, 0)
+        self.listView.move(0, 170)
+
+    def hide_button(self):
+        self.listView_2.move(- 265, 0)
+        self.label.move(- 500, 0)
+        self.label_2.move(-500, 0)
+        self.pushButton_3.move(-1000, 0)
+        self.listView.move(-265, 170)
+        for btn in list_friends:
+            btn.show()
 
 
     def load(self):
