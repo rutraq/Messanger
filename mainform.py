@@ -43,7 +43,7 @@ class Ui_Dialog(object):
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
         self.listView_2 = QtWidgets.QListView(Dialog)
-        self.listView_2.setGeometry(QtCore.QRect(0, 50, 261, 811))
+        self.listView_2.setGeometry(QtCore.QRect(-261, 0, 261, 861))
         self.listView_2.setSelectionRectVisible(False)
         self.listView_2.setObjectName("listView_2")
 

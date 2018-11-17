@@ -101,10 +101,10 @@
   <widget class="QListView" name="listView_2">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>50</y>
+     <x>-261</x>
+     <y>0</y>
      <width>261</width>
-     <height>811</height>
+     <height>861</height>
     </rect>
    </property>
    <property name="selectionRectVisible">

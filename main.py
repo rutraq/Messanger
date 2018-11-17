@@ -9,12 +9,11 @@ import vk_api
 import psycopg2
 import requests
 import os
+import time
 
 list_friends = []
 domains = []
 messages = []
-count = 0;
-
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
     def __init__(self):
@@ -77,12 +76,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.load()
 
     def click(self):
-        global count
-        count+=1
-        if (count % 2 ==1):
-            self.listView_2.show()
-        else:
-            self.listView_2.hide()
+        self.listView_2.move(0, 0)
 
     def load(self):
 
@@ -90,8 +84,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         name = info['first_name']
         surname = info['last_name']
         domain = info['screen_name']
-
-        self.listView_2.hide()
 
         conn = psycopg2.connect(
             "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
