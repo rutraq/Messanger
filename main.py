@@ -80,7 +80,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.listView_2.move(0, 0)
         for btn in list_friends:
             btn.hide()
-            sj,nfmdsvm
 
     def load(self):
 
