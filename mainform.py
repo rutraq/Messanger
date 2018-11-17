@@ -12,7 +12,8 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(QtCore.Qt.NonModal)
-        Dialog.resize(1114, 863)
+        Dialog.resize(1121, 863)
+        Dialog.setStyleSheet("")
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(1040, 810, 71, 51))
         self.pushButton.setObjectName("pushButton")
@@ -43,9 +44,23 @@ class Ui_Dialog(object):
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
         self.listView_2 = QtWidgets.QListView(Dialog)
-        self.listView_2.setGeometry(QtCore.QRect(-261, 0, 261, 861))
+        self.listView_2.setGeometry(QtCore.QRect(-261, 0, 261, 881))
         self.listView_2.setSelectionRectVisible(False)
         self.listView_2.setObjectName("listView_2")
+        self.label = QtWidgets.QLabel(Dialog)
+        self.label.setGeometry(QtCore.QRect(-215, 70, 211, 31))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label.setFont(font)
+        self.label.setText("")
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(-70, 20, 61, 61))
+        self.label_2.setStyleSheet("background-image: url(:/newPrefix/photos/users.png);")
+        self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -54,5 +69,6 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Отправить"))
+        self.label_2.setText(_translate("Dialog", "fdsfdsdfsdfds"))
 
 import main_form_rc

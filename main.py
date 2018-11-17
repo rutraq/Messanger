@@ -77,9 +77,16 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.load()
 
     def click(self):
+        info = vk.account.getProfileInfo()
+        name = info['first_name']
+        surname = info['last_name']
         self.listView_2.move(0, 0)
+        self.label.move(25, 70)
+        self.label_2.move(100, 20)
+        self.label.setText(name + ' ' + surname)
         for btn in list_friends:
             btn.hide()
+
 
     def load(self):
 

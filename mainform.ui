@@ -9,12 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1114</width>
+    <width>1121</width>
     <height>863</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
@@ -104,11 +107,48 @@
      <x>-261</x>
      <y>0</y>
      <width>261</width>
-     <height>861</height>
+     <height>881</height>
     </rect>
    </property>
    <property name="selectionRectVisible">
     <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>-215</x>
+     <y>70</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>-70</x>
+     <y>20</y>
+     <width>61</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/newPrefix/photos/users.png);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
