@@ -76,7 +76,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.load()
 
     def click(self):
-        self.listView_2.move(0, 0)
+        self.listView_2.move(0,0)
 
     def load(self):
 
