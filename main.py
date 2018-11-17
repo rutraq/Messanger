@@ -15,6 +15,7 @@ list_friends = []
 domains = []
 messages = []
 
+
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
     def __init__(self):
         super().__init__()
@@ -77,6 +78,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
     def click(self):
         self.listView_2.move(0, 0)
+        for btn in list_friends:
+            btn.hide()
 
     def load(self):
 
@@ -103,6 +106,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         check = QRadioButton(name_button + ' ' + surname_button, self)
         check.resize(200, 20)
         check.move(10, 70)
+        list_friends.append(check)
         i = 90
         for entry in cur:
             name_button = str(entry[2])
@@ -110,6 +114,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             check = QRadioButton(name_button + ' ' + surname_button, self)
             check.resize(200, 20)
             check.move(10, i)
+            list_friends.append(check)
             i += 20
 
     def send(self):
