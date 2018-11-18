@@ -12,6 +12,7 @@ import os
 import time
 
 list_friends = []
+list_domain = []
 domains = []
 messages = []
 
@@ -106,7 +107,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_4.move(-500, 200)
         self.label_5.move(-500, 200)
 
-
     def load(self):
 
         info = vk.account.getProfileInfo()
@@ -142,6 +142,14 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             check.move(10, i)
             list_friends.append(check)
             i += 20
+        res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
+        row = cur.fetchone()
+        list_domain.append(row[1])
+        for entry in cur:
+            list_domain.append(entry[1])
+
+
+
 
     def send(self):
         i = 0
@@ -149,9 +157,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         text = ''
         for check in list_friends:
             if check.isChecked():
-                choose_friends = 1
+                choose_friends = i
                 if self.lineEdit.text() != '':
-                    vk.messages.send(message=self.lineEdit.text(), domain=domains[i])
+                    vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
                     for mess in messages:

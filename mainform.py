@@ -76,7 +76,7 @@ class Ui_Dialog(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(-70, 10, 61, 61))
+        self.label_2.setGeometry(QtCore.QRect(-200, 10, 61, 61))
         self.label_2.setStyleSheet("background-image: url(:/newPrefix/photos/users.png);\n"
 "background-color: rgb(39, 104, 153);")
         self.label_2.setText("")
@@ -97,7 +97,7 @@ class Ui_Dialog(object):
 "")
         self.listView_3.setObjectName("listView_3")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(-262, 760, 259, 31))
+        self.label_3.setGeometry(QtCore.QRect(10, 760, 259, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
@@ -122,19 +122,42 @@ class Ui_Dialog(object):
         self.label_5.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgb(23, 33, 43);")
         self.label_5.setObjectName("label_5")
+        self.textEdit = QtWidgets.QTextEdit(Dialog)
+        self.textEdit.setEnabled(True)
+        self.textEdit.setGeometry(QtCore.QRect(60, 7, 251, 27))
+        font = QtGui.QFont()
+        font.setStyleStrategy(QtGui.QFont.PreferAntialias)
+        self.textEdit.setFont(font)
+        self.textEdit.setStyleSheet("border-color: rgb(36, 47, 61);\n"
+"color: rgb(255, 255, 255);\n"
+"background-color: rgb(36, 47, 61);\n"
+"")
+        self.textEdit.setObjectName("textEdit")
+        self.label_6 = QtWidgets.QLabel(Dialog)
+        self.label_6.setGeometry(QtCore.QRect(620, 410, 201, 16))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(11)
+        self.label_6.setFont(font)
+        self.label_6.setStyleSheet("border-color: rgb(30, 44, 58);\n"
+"color: rgb(240, 240, 240);\n"
+"background-color: rgb(30, 44, 58);")
+        self.label_6.setObjectName("label_6")
+        self.listView.raise_()
         self.plainTextEdit.raise_()
         self.listView_3.raise_()
         self.pushButton_3.raise_()
         self.pushButton.raise_()
         self.lineEdit.raise_()
         self.pushButton_2.raise_()
-        self.listView_2.raise_()
-        self.label.raise_()
-        self.label_2.raise_()
-        self.listView.raise_()
         self.label_3.raise_()
         self.label_4.raise_()
         self.label_5.raise_()
+        self.textEdit.raise_()
+        self.listView_2.raise_()
+        self.label_2.raise_()
+        self.label.raise_()
+        self.label_6.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -144,5 +167,6 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Отправить"))
         self.label_5.setText(_translate("Dialog", "Настройки"))
+        self.label_6.setText(_translate("Dialog", "Выберите кому хотите написать"))
 
 import main_form_rc

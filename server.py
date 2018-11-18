@@ -18,9 +18,9 @@ row = cur.fetchone()
 #res = cur.execute("INSERT INTO users(count ,domain ,name ,surname) VALUES (%s,%s,%s,%s)", (a, b, c, d))  #Добавление информации
 #conn.commit()
 #row = cur.fetchone()
-print(row)        # Вывод информации с мансами
+print(row[1])        # Вывод информации с мансами
 for entry in cur:
-    print(entry)
+    print(entry[1])
 
 conn.close() # Разрываем подключение.
 
