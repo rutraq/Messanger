@@ -89,6 +89,10 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             btn.hide()
         self.pushButton_3.move(260, 0)
         self.listView.move(0, 170)
+        self.label_3.setText('Povistochka Desktop')
+        self.label_3.move(1, 760)
+        self.label_4.move(30, 200)
+        self.label_5.move(80, 200)
 
     def hide_button(self):
         self.listView_2.move(- 265, 0)
@@ -96,8 +100,11 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_2.move(-500, 0)
         self.pushButton_3.move(-1000, 0)
         self.listView.move(-265, 170)
+        self.label_3.move(-300, 760)
         for btn in list_friends:
             btn.show()
+        self.label_4.move(-500, 200)
+        self.label_5.move(-500, 200)
 
 
     def load(self):
