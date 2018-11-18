@@ -148,9 +148,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         for entry in cur:
             list_domain.append(entry[1])
 
-
-
-
     def send(self):
         i = 0
         choose_friends = 0
