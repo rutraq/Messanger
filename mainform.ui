@@ -344,6 +344,7 @@ background-color: rgb(30, 44, 58);</string>
     <string>Выберите кому хотите написать</string>
    </property>
   </widget>
+  <zorder>label_6</zorder>
   <zorder>listView</zorder>
   <zorder>plainTextEdit</zorder>
   <zorder>listView_3</zorder>
@@ -358,7 +359,6 @@ background-color: rgb(30, 44, 58);</string>
   <zorder>listView_2</zorder>
   <zorder>label_2</zorder>
   <zorder>label</zorder>
-  <zorder>label_6</zorder>
  </widget>
  <resources>
   <include location="main_form.qrc"/>

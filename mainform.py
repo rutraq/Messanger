@@ -143,6 +143,7 @@ class Ui_Dialog(object):
 "color: rgb(240, 240, 240);\n"
 "background-color: rgb(30, 44, 58);")
         self.label_6.setObjectName("label_6")
+        self.label_6.raise_()
         self.listView.raise_()
         self.plainTextEdit.raise_()
         self.listView_3.raise_()
@@ -157,7 +158,6 @@ class Ui_Dialog(object):
         self.listView_2.raise_()
         self.label_2.raise_()
         self.label.raise_()
-        self.label_6.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
