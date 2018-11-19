@@ -14,8 +14,10 @@ while True:
             if len(updates['profiles']) == 1:
                 print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0]['last_name'] + ":")
                 print(updates['messages']['items'][msg]['text'])
+                user_id_vk = updates['profiles'][0]['id']
+                msg = input("Enter your text: ")
+                vk.messages.send(user_id=user_id_vk, message=msg)
             elif len(updates['profiles']) == 2:
                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1]['last_name'] + ":")
                 print(updates['messages']['items'][msg]['text'])
         info_for_messages = vk.messages.getLongPollServer(need_pts=1)
-        print("read")
