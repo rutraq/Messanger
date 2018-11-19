@@ -92,7 +92,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.listView.move(0, 170)
         self.label_3.move(10, 760)
         self.label_7.move(10, 810)
-        self.label_3.move(1, 760)
         self.label_4.move(30, 200)
         self.label_5.move(80, 200)
 
