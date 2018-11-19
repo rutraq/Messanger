@@ -154,7 +154,11 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         list_domain.append(row[1])
         for entry in cur:
             list_domain.append(entry[1])
-        self.listView_3.setStyleSheet('border-style: solid; border-width: 0px; border-color: #17212b;')
+        self.listView_3.setStyleSheet('border-style: solid; border-width: 1px; border-color: #000000; background-color :#17212b;')
+        self.textEdit.setStyleSheet('border-style: solid; border-width: 0px; border-color: #242F3D; background-color :#242F3D; border-radius: 3px;')
+        self.pushButton.setStyleSheet('border-style: solid; border-width: 1px; border-top-color: #000000; background-color :#17212b;')
+        self.plainTextEdit.setStyleSheet('border-style: solid; border-width: 0px; border-color: #0E1621; background-color :#0E1621;')
+        self.lineEdit.setStyleSheet('border-style: solid; border-width: 1px; border-color: #000000; background-color :#17212b;')
 
     def choosen_dialog(self):
         self.label_6.setVisible(False)
