@@ -235,7 +235,7 @@ border-color: rgb(23, 33, 43);</string>
     <rect>
      <x>10</x>
      <y>760</y>
-     <width>259</width>
+     <width>261</width>
      <height>31</height>
     </rect>
    </property>
@@ -344,11 +344,36 @@ background-color: rgb(30, 44, 58);</string>
     <string>Выберите кому хотите написать</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>810</y>
+     <width>259</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(23, 33, 43);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
   <zorder>label_6</zorder>
   <zorder>listView</zorder>
   <zorder>plainTextEdit</zorder>
   <zorder>listView_3</zorder>
-  <zorder>pushButton_3</zorder>
   <zorder>pushButton</zorder>
   <zorder>lineEdit</zorder>
   <zorder>pushButton_2</zorder>
@@ -359,6 +384,8 @@ background-color: rgb(30, 44, 58);</string>
   <zorder>listView_2</zorder>
   <zorder>label_2</zorder>
   <zorder>label</zorder>
+  <zorder>label_7</zorder>
+  <zorder>pushButton_3</zorder>
  </widget>
  <resources>
   <include location="main_form.qrc"/>
