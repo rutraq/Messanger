@@ -90,8 +90,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             btn.hide()
         self.pushButton_3.move(260, 0)
         self.listView.move(0, 170)
-        self.label_3.setText('Povistochka Desktop')
-        self.label_7.setText('Vershion : Alpha')
+        self.label_3.move(10, 760)
+        self.label_7.move(10, 810)
         self.label_3.move(1, 760)
         self.label_4.move(30, 200)
         self.label_5.move(80, 200)
@@ -134,6 +134,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         check = QRadioButton(name_button + ' ' + surname_button, self)
         check.resize(200, 20)
         check.move(10, 70)
+        check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
         list_friends.append(check)
         i = 90
         for entry in cur:
@@ -142,6 +143,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             check = QRadioButton(name_button + ' ' + surname_button, self)
             check.resize(200, 20)
             check.move(10, i)
+            check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
             list_friends.append(check)
             i += 20
         res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")

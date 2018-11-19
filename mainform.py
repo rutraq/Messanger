@@ -97,14 +97,13 @@ class Ui_Dialog(object):
 "")
         self.listView_3.setObjectName("listView_3")
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(10, 760, 261, 31))
+        self.label_3.setGeometry(QtCore.QRect(-500, 760, 250, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
         self.label_3.setFont(font)
         self.label_3.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgb(23, 33, 43);")
-        self.label_3.setText("")
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(Dialog)
@@ -141,17 +140,16 @@ class Ui_Dialog(object):
         self.label_6.setFont(font)
         self.label_6.setStyleSheet("border-color: rgb(30, 44, 58);\n"
 "color: rgb(240, 240, 240);\n"
-"background-color: rgb(30, 44, 58);")
+"background-color: rgb(14, 22, 33);")
         self.label_6.setObjectName("label_6")
         self.label_7 = QtWidgets.QLabel(Dialog)
-        self.label_7.setGeometry(QtCore.QRect(10, 810, 259, 31))
+        self.label_7.setGeometry(QtCore.QRect(-500, 810, 250, 31))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
         self.label_7.setFont(font)
         self.label_7.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgb(23, 33, 43);")
-        self.label_7.setText("")
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
         self.label_7.setObjectName("label_7")
         self.label_6.raise_()
@@ -161,15 +159,15 @@ class Ui_Dialog(object):
         self.pushButton.raise_()
         self.lineEdit.raise_()
         self.pushButton_2.raise_()
-        self.label_3.raise_()
         self.label_4.raise_()
         self.label_5.raise_()
         self.textEdit.raise_()
         self.listView_2.raise_()
         self.label_2.raise_()
         self.label.raise_()
-        self.label_7.raise_()
         self.pushButton_3.raise_()
+        self.label_3.raise_()
+        self.label_7.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -178,7 +176,9 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.pushButton.setText(_translate("Dialog", "Отправить"))
+        self.label_3.setText(_translate("Dialog", "Povistochka Desktop"))
         self.label_5.setText(_translate("Dialog", "Настройки"))
         self.label_6.setText(_translate("Dialog", "Выберите кому хотите написать"))
+        self.label_7.setText(_translate("Dialog", "Vershion : Alpha"))
 
 import main_form_rc
