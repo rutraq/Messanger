@@ -94,6 +94,7 @@ class Ui_Dialog(object):
         self.listView_3 = QtWidgets.QListView(Dialog)
         self.listView_3.setGeometry(QtCore.QRect(0, 0, 331, 871))
         self.listView_3.setStyleSheet("background-color: rgb(23, 33, 43);\n"
+"color: rgb(23, 33, 43);\n"
 "")
         self.listView_3.setObjectName("listView_3")
         self.label_3 = QtWidgets.QLabel(Dialog)
