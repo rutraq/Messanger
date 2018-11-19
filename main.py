@@ -75,7 +75,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.pushButton_2.clicked.connect(self.click)
         self.pushButton_3.clicked.connect(self.hide_button)
         self.setWindowIcon(QIcon('photos/logo.png'))
-        self.lineEdit.returnPressed.connect(self.key_press)
+        self.lineEdit.returnPressed.connect(self.send)
         self.load()
 
     def click(self):
@@ -132,25 +132,35 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         name_button = str(row[2])
         surname_button = str(row[3])
         check = QRadioButton(name_button + ' ' + surname_button, self)
-        check.resize(200, 20)
+        check.resize(260, 20)
         check.move(10, 70)
+        check.clicked.connect(self.choosen_dialog)
+        check.setFont(QtGui.QFont("Times", 12, QtGui.QFont.Bold))
         check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
         list_friends.append(check)
-        i = 90
+        i = 100
         for entry in cur:
             name_button = str(entry[2])
             surname_button = str(entry[3])
             check = QRadioButton(name_button + ' ' + surname_button, self)
-            check.resize(200, 20)
+            check.resize(260, 20)
             check.move(10, i)
+            check.clicked.connect(self.choosen_dialog)
+            check.setFont(QtGui.QFont("Times", 12, QtGui.QFont.Bold))
             check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
             list_friends.append(check)
-            i += 20
+            i += 30
         res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
         list_domain.append(row[1])
         for entry in cur:
             list_domain.append(entry[1])
+
+    def choosen_dialog(self):
+        self.label_6.setVisible(False)
+        self.plainTextEdit.move(330, 0)
+        self.lineEdit.move(330, 810)
+        self.pushButton.move(1050, 810)
 
     def send(self):
         i = 0
@@ -164,27 +174,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
                     for mess in messages:
-                        text += mess + "\n"
-                    self.plainTextEdit.setPlainText(text)
-                else:
-                    msgbox(msg="Enter a message", title="ERROR")
-            i += 1
-        if choose_friends == 0:
-            msgbox(msg="Choose a friend", title="ERROR")
-
-    def key_press(self):
-        i = 0
-        choose_friends = 0
-        text = ''
-        for check in list_friends:
-            if check.isChecked():
-                choose_friends = i
-                if self.lineEdit.text() != '':
-                    vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
-                    messages.append(self.lineEdit.text())
-                    self.lineEdit.setText('')
-                    for mess in messages:
-                        text += mess + "\n"
+                        text += "Я:" + "\n" + mess + "\n"
                     self.plainTextEdit.setPlainText(text)
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
