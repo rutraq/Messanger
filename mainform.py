@@ -13,8 +13,7 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(QtCore.Qt.NonModal)
         Dialog.resize(1122, 859)
-        Dialog.setStyleSheet("background-color: rgb(14, 22, 33);\n"
-"")
+        Dialog.setStyleSheet("background-color: rgb(14, 22, 33);")
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(1150, 810, 71, 51))
         palette = QtGui.QPalette()
@@ -87,7 +86,7 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.plainTextEdit = QtWidgets.QPlainTextEdit(Dialog)
         self.plainTextEdit.setEnabled(True)
-        self.plainTextEdit.setGeometry(QtCore.QRect(1500, 0, 791, 811))
+        self.plainTextEdit.setGeometry(QtCore.QRect(1500, 40, 791, 771))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
@@ -112,12 +111,9 @@ class Ui_Dialog(object):
         self.lineEdit.setObjectName("lineEdit")
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setGeometry(QtCore.QRect(0, 0, 38, 37))
+        self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.pushButton_2.setStyleSheet("background-image: url(:/newPrefix/photos/menu.png);\n"
-"border-color: rgb(23, 33, 43);\n"
-"background-color: rgb(255, 255, 255);\n"
-"\n"
-"")
+        self.pushButton_2.setStyleSheet("background-image: url(:/newPrefix/photos/menu.png);")
         self.pushButton_2.setText("")
         self.pushButton_2.setObjectName("pushButton_2")
         self.listView_2 = QtWidgets.QListView(Dialog)
@@ -158,8 +154,7 @@ class Ui_Dialog(object):
         self.listView.setObjectName("listView")
         self.listView_3 = QtWidgets.QListView(Dialog)
         self.listView_3.setGeometry(QtCore.QRect(0, 0, 331, 871))
-        self.listView_3.setStyleSheet("background-color: rgb(23, 33, 43);\n"
-"")
+        self.listView_3.setStyleSheet("background-color: rgb(23, 33, 43);")
         self.listView_3.setObjectName("listView_3")
         self.label_3 = QtWidgets.QLabel(Dialog)
         self.label_3.setGeometry(QtCore.QRect(-500, 760, 250, 31))
@@ -192,13 +187,14 @@ class Ui_Dialog(object):
         font = QtGui.QFont()
         font.setStyleStrategy(QtGui.QFont.PreferAntialias)
         self.textEdit.setFont(font)
+        self.textEdit.viewport().setProperty("cursor", QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.textEdit.setStyleSheet("border-color: rgb(36, 47, 61);\n"
 "color: rgb(255, 255, 255);\n"
 "background-color: rgb(36, 47, 61);\n"
 "")
         self.textEdit.setObjectName("textEdit")
         self.label_6 = QtWidgets.QLabel(Dialog)
-        self.label_6.setGeometry(QtCore.QRect(580, 370, 251, 21))
+        self.label_6.setGeometry(QtCore.QRect(580, 370, 311, 21))
         font = QtGui.QFont()
         font.setFamily("Times New Roman")
         font.setPointSize(12)
@@ -220,6 +216,18 @@ class Ui_Dialog(object):
 "background-color: rgb(23, 33, 43);")
         self.label_7.setAlignment(QtCore.Qt.AlignCenter)
         self.label_7.setObjectName("label_7")
+        self.label_8 = QtWidgets.QLabel(Dialog)
+        self.label_8.setGeometry(QtCore.QRect(1500, 0, 791, 31))
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_8.setFont(font)
+        self.label_8.setStyleSheet("color: rgb(255, 255, 255);")
+        self.label_8.setText("")
+        self.label_8.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_8.setObjectName("label_8")
         self.label_6.raise_()
         self.listView.raise_()
         self.plainTextEdit.raise_()
@@ -236,6 +244,7 @@ class Ui_Dialog(object):
         self.pushButton_3.raise_()
         self.label_3.raise_()
         self.label_7.raise_()
+        self.label_8.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

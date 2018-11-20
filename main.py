@@ -11,7 +11,8 @@ import requests
 import os
 import time
 
-list_friends = []
+list_friends_buttons = []
+list_friends_surnames = []
 list_domain = []
 domains = []
 messages = []
@@ -77,6 +78,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.setWindowIcon(QIcon('photos/logo.png'))
         self.lineEdit.returnPressed.connect(self.send)
         self.load()
+        self.design()
 
     def click(self):
         info = vk.account.getProfileInfo()
@@ -86,7 +88,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label.move(0, 100)
         self.label_2.move(100, 20)
         self.label.setText(name + ' ' + surname)
-        for btn in list_friends:
+        for btn in list_friends_buttons:
             btn.hide()
         self.pushButton_3.move(260, 0)
         self.listView.move(0, 170)
@@ -94,6 +96,11 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_7.move(10, 810)
         self.label_4.move(30, 200)
         self.label_5.move(80, 200)
+
+    def design(self):
+        self.pushButton_2.setStyleSheet(
+            'border-style: solid; border-width: 1px; border-color: black; '
+            'background-image: url(:/newPrefix/photos/menu.png);')
 
     def hide_button(self):
         self.listView_2.move(- 265, 0)
@@ -103,13 +110,12 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.listView.move(-265, 170)
         self.label_3.move(-300, 760)
         self.label_7.move(-300, 810)
-        for btn in list_friends:
+        for btn in list_friends_buttons:
             btn.show()
         self.label_4.move(-500, 200)
         self.label_5.move(-500, 200)
 
     def load(self):
-
         info = vk.account.getProfileInfo()
         name = info['first_name']
         surname = info['last_name']
@@ -131,23 +137,25 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         name_button = str(row[2])
         surname_button = str(row[3])
         check = QRadioButton(name_button + ' ' + surname_button, self)
+        list_friends_surnames.append(name_button + ' ' + surname_button)
         check.resize(260, 20)
         check.move(10, 70)
         check.clicked.connect(self.choosen_dialog)
         check.setFont(QtGui.QFont("Times", 12, QtGui.QFont.Bold))
         check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
-        list_friends.append(check)
+        list_friends_buttons.append(check)
         i = 100
         for entry in cur:
             name_button = str(entry[2])
             surname_button = str(entry[3])
             check = QRadioButton(name_button + ' ' + surname_button, self)
+            list_friends_surnames.append(name_button + ' ' + surname_button)
             check.resize(260, 20)
             check.move(10, i)
             check.clicked.connect(self.choosen_dialog)
             check.setFont(QtGui.QFont("Times", 12, QtGui.QFont.Bold))
             check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
-            list_friends.append(check)
+            list_friends_buttons.append(check)
             i += 30
         res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
@@ -165,18 +173,32 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             'border-style: solid; border-width: 0px; border-color: #0E1621; background-color :#0E1621; color :#ffffff')
         self.lineEdit.setStyleSheet(
             'border-style: solid; border-width: 1px; border-color: #000000; background-color :#17212b; color :#ffffff')
+        self.listView.setStyleSheet('border-style: solid; border-width: 1px; border-color: #17212b')
+        self.listView_2.setStyleSheet(
+            'border-style: solid; border-width: 1px; border-color: #276899; background-color: #276899')
 
     def choosen_dialog(self):
         self.label_6.setVisible(False)
-        self.plainTextEdit.move(330, 0)
+        self.plainTextEdit.move(330, 40)
         self.lineEdit.move(330, 810)
         self.pushButton.move(1050, 810)
+        self.label_8.move(330, 0)
+        self.choosen_friend()
+
+    def choosen_friend(self):
+        i = 0
+        for check in list_friends_buttons:
+            if check.isChecked():
+                friend = list_friends_surnames[i]
+                self.label_8.setText(friend)
+                break
+            i += 1
 
     def send(self):
         i = 0
         choose_friends = 0
         text = ''
-        for check in list_friends:
+        for check in list_friends_buttons:
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
