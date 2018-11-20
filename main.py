@@ -193,6 +193,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 friend = list_friends_surnames[i]
                 self.label_8.setText(friend)
+                self.plainTextEdit.clear()
                 break
             i += 1
 
