@@ -10,12 +10,17 @@ import psycopg2
 import requests
 import os
 import time
+import uuid
 
 list_friends_buttons = []
 list_friends_surnames = []
 list_domain = []
 domains = []
 messages = []
+
+conn = psycopg2.connect(
+    "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+cur = conn.cursor()
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -121,18 +126,15 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         surname = info['last_name']
         domain = info['screen_name']
 
-        conn = psycopg2.connect(
-            "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-        cur = conn.cursor()
-        res = cur.execute("SELECT * FROM users WHERE DOMAIN = '" + domain + "' ")
+        cur.execute("SELECT * FROM users WHERE DOMAIN = '" + domain + "' ")
         row = cur.fetchone()
 
         if not row:
-            res = cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
+            cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
                               (domain, name, surname))  # Добавление информации
             conn.commit()
 
-        res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
+        cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
         name_button = str(row[2])
         surname_button = str(row[3])
@@ -157,7 +159,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
             list_friends_buttons.append(check)
             i += 30
-        res = cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
+        cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
         list_domain.append(row[1])
         for entry in cur:
@@ -195,6 +197,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             i += 1
 
     def send(self):
+        info = vk.account.getProfileInfo()
+        domain = info['screen_name']
         i = 0
         choose_friends = 0
         text = ''
@@ -208,6 +212,13 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     for mess in messages:
                         text += "Я:" + "\n" + mess + "\n"
                     self.plainTextEdit.setPlainText(text)
+                    cur.execute("SELECT * FROM KEY WHERE DOMAIN = '" + domain + "' And Domain1 = '" + list_domain[i] + "' ")
+                    row = cur.fetchone()
+                    if not row:
+                        key = str(uuid.uuid4())
+                        cur.execute("INSERT INTO KEY(domain, domain1, chat) VALUES (%s,%s,%s)",
+                                    (domain, list_domain[i], key))  # Добавление информации
+                        conn.commit()
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
             i += 1
