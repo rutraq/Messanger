@@ -149,6 +149,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         check.setStyleSheet('QRadioButton {background-color: #17212b; color: white;}')
         list_friends_buttons.append(check)
         i = 100
+
         for entry in cur:
             name_button = str(entry[2])
             surname_button = str(entry[3])
