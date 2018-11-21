@@ -9,7 +9,6 @@ import vk_api
 import psycopg2
 import requests
 import os
-import time
 import uuid
 
 list_friends_buttons = []
@@ -18,9 +17,12 @@ list_domain = []
 domains = []
 messages = []
 
-conn = psycopg2.connect(
-    "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-cur = conn.cursor()
+try:
+    conn = psycopg2.connect(
+        "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+    cur = conn.cursor()
+except psycopg2.OperationalError:
+    msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
