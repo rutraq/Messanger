@@ -81,6 +81,11 @@ class Ui_Dialog(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Shadow, brush)
         self.pushButton.setPalette(palette)
+        font = QtGui.QFont()
+        font.setFamily("Times New Roman")
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("color: rgb(255, 255, 255);\n"
 "background-color: rgb(23, 33, 43);")
         self.pushButton.setObjectName("pushButton")
