@@ -210,10 +210,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)",
                               (domain, str(pubkey)))
             conn.commit()
-            f = open("key.txt", "w")
-            f.write(str(privkey))
-            f.close()
-
         i = 0
         choose_friends = 0
         text = ''
@@ -221,8 +217,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
-                    crypto = rsa.encrypt(self.lineEdit.text().encode('utf8'), pubkey)
-                    vk.messages.send(message=crypto, domain=list_domain[i])
+                    vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
                     for mess in messages:
