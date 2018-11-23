@@ -210,6 +210,10 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)",
                               (domain, str(pubkey)))
             conn.commit()
+            f = open("key.txt", "w")
+            f.write(str(privkey))
+            f.close()
+
         i = 0
         choose_friends = 0
         text = ''
