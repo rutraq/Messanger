@@ -9,7 +9,7 @@ import vk_api
 import psycopg2
 import requests
 import os
-import uuid
+import rsa
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -201,8 +201,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             i += 1
 
     def send(self):
+        (pubkey, privkey) = rsa.newkeys(512)
+        print(pubkey)
         info = vk.account.getProfileInfo()
-        domain = info['screen_name']
         i = 0
         choose_friends = 0
         text = ''
@@ -210,19 +211,13 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
-                    vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
+                    crypto = rsa.encrypt(self.lineEdit.text().encode('utf8'), pubkey)
+                    vk.messages.send(message=crypto, domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
                     for mess in messages:
                         text += "Я:" + "\n" + mess + "\n"
                     self.plainTextEdit.setPlainText(text)
-                    cur.execute("SELECT * FROM KEY WHERE DOMAIN = '" + domain + "' And Domain1 = '" + list_domain[i] + "' ")
-                    row = cur.fetchone()
-                    if not row:
-                        key = str(uuid.uuid4())
-                        cur.execute("INSERT INTO KEY(domain, domain1, chat) VALUES (%s,%s,%s)",
-                                    (domain, list_domain[i], key))  # Добавление информации
-                        conn.commit()
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
             i += 1

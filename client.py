@@ -5,7 +5,7 @@ from easygui import passwordbox
 
 check = 0
 list_domain = []
-vk_session = vk_api.VkApi("+375293332133", passwordbox(msg="Enter password"))
+vk_session = vk_api.VkApi("+375259143589", passwordbox(msg="Enter password"))
 vk_session.auth()
 vk = vk_session.get_api()
 
