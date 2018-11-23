@@ -216,6 +216,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
+
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
