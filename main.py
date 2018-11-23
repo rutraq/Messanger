@@ -201,9 +201,15 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             i += 1
 
     def send(self):
-        (pubkey, privkey) = rsa.newkeys(512)
-        print(pubkey)
         info = vk.account.getProfileInfo()
+        domain = info['screen_name']
+        cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
+        row = cur.fetchone()
+        if not row:
+            (pubkey, privkey) = rsa.newkeys(512)
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)",
+                              (domain, str(pubkey)))
+            conn.commit()
         i = 0
         choose_friends = 0
         text = ''
