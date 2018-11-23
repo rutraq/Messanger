@@ -207,8 +207,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         row = cur.fetchone()
         if not row:
             (pubkey, privkey) = rsa.newkeys(512)
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)",
-                              (domain, str(pubkey)))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
             conn.commit()
         i = 0
         choose_friends = 0
