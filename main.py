@@ -207,7 +207,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         row = cur.fetchone()
         if not row:
             (pubkey, privkey) = rsa.newkeys(512)
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, rsa.PublicKey.__str__(pubkey)))
             conn.commit()
         i = 0
         choose_friends = 0
@@ -216,8 +216,13 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
-
-                    vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
+                    cur.execute("SELECT * FROM persons")
+                    row = cur.fetchone()
+                    print(row[1])
+                    rsa.PublicKey.__format__(row[1], bytes())
+                    print(self.lineEdit.text().encode('utf-8'))
+                    crypto = rsa.encrypt((self.lineEdit.text().encode('utf-8')), row[1])
+                    vk.messages.send(message=crypto, domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
                     for mess in messages:
