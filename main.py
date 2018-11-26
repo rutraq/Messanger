@@ -10,8 +10,6 @@ import psycopg2
 import requests
 import os
 import rsa
-from threading import Thread
-from multiprocessing import Process
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -19,15 +17,12 @@ list_domain = []
 domains = []
 messages = []
 
-
-def login_with_sql():
-    global conn, cur
-    try:
-        conn = psycopg2.connect(
-            "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-        cur = conn.cursor()
-    except psycopg2.OperationalError:
-        msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
+try:
+    conn = psycopg2.connect(
+        "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+    cur = conn.cursor()
+except psycopg2.OperationalError:
+    msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -212,8 +207,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         row = cur.fetchone()
         if not row:
             (pubkey, privkey) = rsa.newkeys(512)
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)",
-                        (domain, str(pubkey)))
+            print(type(pubkey))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
             conn.commit()
         i = 0
         choose_friends = 0
@@ -222,6 +217,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
+                    cur.execute("SELECT * FROM persons")
+                    row = cur.fetchone()
+                    print(type(row[1]))
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
@@ -236,8 +234,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
 
 if __name__ == '__main__':
-    thread = Thread(target=login_with_sql)
-    thread.start()
     app = Qt.QApplication([])
     si = Loginform()
     si.show()
