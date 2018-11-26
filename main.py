@@ -10,6 +10,8 @@ import psycopg2
 import requests
 import os
 import rsa
+from threading import Thread
+from multiprocessing import Process
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -17,12 +19,15 @@ list_domain = []
 domains = []
 messages = []
 
-try:
-    conn = psycopg2.connect(
-        "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
-    cur = conn.cursor()
-except psycopg2.OperationalError:
-    msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
+
+def login_with_sql():
+    global conn, cur
+    try:
+        conn = psycopg2.connect(
+            "dbname='dbkwmnvo' user='dbkwmnvo' host='stampy.db.elephantsql.com' password='Svlw7QnOgENeOI6XnC2obr5GY8ojNINR'")
+        cur = conn.cursor()
+    except psycopg2.OperationalError:
+        msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -133,7 +138,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
         if not row:
             cur.execute("INSERT INTO users(domain, name, surname) VALUES (%s,%s,%s)",
-                              (domain, name, surname))  # Добавление информации
+                        (domain, name, surname))  # Добавление информации
             conn.commit()
 
         cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
@@ -208,7 +213,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         if not row:
             (pubkey, privkey) = rsa.newkeys(512)
             cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)",
-                              (domain, str(pubkey)))
+                        (domain, str(pubkey)))
             conn.commit()
         i = 0
         choose_friends = 0
@@ -231,6 +236,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
 
 if __name__ == '__main__':
+    thread = Thread(target=login_with_sql)
+    thread.start()
     app = Qt.QApplication([])
     si = Loginform()
     si.show()
