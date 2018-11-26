@@ -1,12 +1,12 @@
 import rsa
 
 (pubkey, privkey) = rsa.newkeys(512)
-a = bytes(pubkey)
+print(pubkey)
 
 message = b'Hello Blablacode.ru!'
 
 # шифруем
-crypto = rsa.encrypt(message, a)
+crypto = rsa.encrypt(message, pubkey)
 print(crypto)
 # расшифровываем
 message = rsa.decrypt(crypto, privkey)
