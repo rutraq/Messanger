@@ -44,7 +44,7 @@ def get_message():
                             if len(updates['profiles']) == 1:
                                 print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0]['last_name'] + ":")
                                 print(updates['messages']['items'][msg]['text'])
-                                send_message(domain_vk)
+                                # send_message(domain_vk)
                             elif len(updates['profiles']) == 2:
                                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1]['last_name'] + ":")
                                 print(updates['messages']['items'][msg]['text'])
