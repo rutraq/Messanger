@@ -1,4 +1,3 @@
-import psycopg2
 import time
 import easygui
 from multiprocessing import Process
