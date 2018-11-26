@@ -1,23 +1,13 @@
-from threading import Thread
-from time import sleep
-import client
+import rsa
 
+(pubkey, privkey) = rsa.newkeys(512)
+print(pubkey)
 
-def threaded_function():
-    client.get_message()
-    
+message = b'Hello Blablacode.ru!'
 
-def thread_func(arg2):
-    for i in range(arg2):
-        print("sos")
-        sleep(3)
-
-
-if __name__ == "__main__":
-    thread = Thread(target=threaded_function)
-    thread2 = Thread(target=thread_func, args=(30, ))
-    thread.start()
-    print("thread finished...exiting")
-    while True:
-        print("sos")
-        sleep(3)
+# шифруем
+crypto = rsa.encrypt(message, pubkey)
+print(crypto)
+# расшифровываем
+message = rsa.decrypt(crypto, privkey)
+print(message)
