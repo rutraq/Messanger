@@ -220,7 +220,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     cur.execute("SELECT * FROM persons")
                     row = cur.fetchone()
                     print(type(row[1]))
-                    print(key)
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
