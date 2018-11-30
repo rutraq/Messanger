@@ -216,6 +216,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.listView.setStyleSheet('border-style: solid; border-width: 1px; border-color: #17212b')
         self.listView_2.setStyleSheet(
             'border-style: solid; border-width: 1px; border-color: #276899; background-color: #276899')
+        self.thread1 = MyThread(1)
+        self.thread1.progress.connect(self.add_message)
+        self.thread1.start()
 
     def choosen_dialog(self):
         self.label_6.setVisible(False)
@@ -227,6 +230,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
     def choosen_friend(self):
         i = 0
+        text = ''
         for check in list_friends_buttons:
             if check.isChecked():
                 friend = list_friends_surnames[i]
@@ -234,9 +238,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 self.plainTextEdit.clear()
                 break
             i += 1
-        self.thread1 = MyThread(1)
-        self.thread1.progress.connect(self.add_message)
-        self.thread1.start()
+        for mess in messages:
+            text += "кто-то:" + "\n" + mess + "\n"
+        self.plainTextEdit.setPlainText(text)
 
     def add_message(self, value):
         messages.append(value)
