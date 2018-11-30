@@ -47,9 +47,11 @@ class MyThread(QThread):
                     domain_vk = updates['profiles'][0]['domain']
                     for domain in list_domain:
                         if domain == domain_vk:
-                            vk.messages.markAsRead(peer_id=updates['messages']['items'][msg]['peer_id'])
+                            # vk.messages.markAsRead(peer_id=updates['messages']['items'][msg]['peer_id'])
                             if len(updates['profiles']) == 1:
                                 print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
+                                    'last_name'] + ":")
+                                messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
                                 self.progress.emit(ex)
@@ -226,6 +228,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.lineEdit.move(330, 810)
         self.pushButton.move(1050, 810)
         self.label_8.move(330, 0)
+        self.plainTextEdit.setPlainText("")
         self.choosen_friend()
 
     def choosen_friend(self):
@@ -239,14 +242,14 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 break
             i += 1
         for mess in messages:
-            text += "кто-то:" + "\n" + mess + "\n"
+            text += mess + "\n"
         self.plainTextEdit.setPlainText(text)
 
     def add_message(self, value):
         messages.append(value)
         text = ''
         for mess in messages:
-            text += "кто-то:" + "\n" + mess + "\n"
+            text += mess + "\n"
         self.plainTextEdit.setPlainText(text)
 
     def send(self):
@@ -270,10 +273,11 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     row = cur.fetchone()
                     print(type(row[1]))
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
+                    messages.append("Я:")
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
                     for mess in messages:
-                        text += "Я:" + "\n" + mess + "\n"
+                        text += mess + "\n"
                     self.plainTextEdit.setPlainText(text)
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
