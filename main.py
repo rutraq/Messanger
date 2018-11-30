@@ -12,6 +12,7 @@ import os
 import rsa
 from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
+import pickle
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -261,7 +262,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         if not row:
             (pubkey, privkey) = rsa.newkeys(512)
             print(type(pubkey))
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, pickle.dumps(pubkey)))
             conn.commit()
         i = 0
         choose_friends = 0
@@ -272,7 +273,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 if self.lineEdit.text() != '':
                     cur.execute("SELECT * FROM persons")
                     row = cur.fetchone()
-                    print(type(row[1]))
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
