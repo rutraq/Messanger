@@ -11,7 +11,7 @@ import requests
 import os
 import rsa
 from threading import Thread
-from multiprocessing import Process
+from PyQt5.QtCore import QThread, pyqtSignal
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -28,6 +28,36 @@ def login_with_sql():
         cur = conn.cursor()
     except psycopg2.OperationalError:
         msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
+
+
+class MyThread(QThread):
+    progress = pyqtSignal(str)  # сигнал который мы будем передавать прогрессбару
+
+    def __init__(self, k):
+        super().__init__()
+        self.k = k
+
+    def run(self):  # наша функция(полезная работа), без всяких if pbNumber == 1:
+        info_for_messages = vk.messages.getLongPollServer(need_pts=1)
+        while True:
+            updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'],
+                                                     fields='domain')
+            if len(updates['messages']['items']) > 0:
+                for msg in range(len(updates['messages']['items'])):
+                    domain_vk = updates['profiles'][0]['domain']
+                    for domain in list_domain:
+                        if domain == domain_vk:
+                            vk.messages.markAsRead(peer_id=updates['messages']['items'][msg]['peer_id'])
+                            if len(updates['profiles']) == 1:
+                                print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
+                                    'last_name'] + ":")
+                                ex = updates['messages']['items'][msg]['text']
+                                self.progress.emit(ex)
+                            elif len(updates['profiles']) == 2:
+                                print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1][
+                                    'last_name'] + ":")
+                                print(updates['messages']['items'][msg]['text'])
+                info_for_messages = vk.messages.getLongPollServer(need_pts=1)
 
 
 class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
@@ -204,6 +234,16 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 self.plainTextEdit.clear()
                 break
             i += 1
+        self.thread1 = MyThread(1)
+        self.thread1.progress.connect(self.add_message)
+        self.thread1.start()
+
+    def add_message(self, value):
+        messages.append(value)
+        text = ''
+        for mess in messages:
+            text += "кто-то:" + "\n" + mess + "\n"
+        self.plainTextEdit.setPlainText(text)
 
     def send(self):
         info = vk.account.getProfileInfo()

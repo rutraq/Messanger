@@ -29,9 +29,7 @@ def send_message(domain_for_sending):
     vk.messages.send(domain=domain_for_sending, message=message)
 
 
-def get_message():
-    login()
-    get_friends()
+def get_message(vk):
     info_for_messages = vk.messages.getLongPollServer(need_pts=1)
     while True:
         updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'], fields='domain')
@@ -44,7 +42,6 @@ def get_message():
                             if len(updates['profiles']) == 1:
                                 print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0]['last_name'] + ":")
                                 print(updates['messages']['items'][msg]['text'])
-                                # send_message(domain_vk)
                             elif len(updates['profiles']) == 2:
                                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1]['last_name'] + ":")
                                 print(updates['messages']['items'][msg]['text'])
