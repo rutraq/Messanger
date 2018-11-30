@@ -228,7 +228,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.lineEdit.move(330, 810)
         self.pushButton.move(1050, 810)
         self.label_8.move(330, 0)
-        self.plainTextEdit.setPlainText("")
         self.choosen_friend()
 
     def choosen_friend(self):
@@ -238,12 +237,13 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             if check.isChecked():
                 friend = list_friends_surnames[i]
                 self.label_8.setText(friend)
-                self.plainTextEdit.clear()
+                messages.clear()
                 break
             i += 1
-        for mess in messages:
-            text += mess + "\n"
-        self.plainTextEdit.setPlainText(text)
+        if len(messages) != 0:
+            for mess in messages:
+                text += mess + "\n"
+            self.plainTextEdit.setPlainText(text)
 
     def add_message(self, value):
         messages.append(value)
