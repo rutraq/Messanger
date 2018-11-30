@@ -37,7 +37,7 @@ class MyThread(QThread):
         super().__init__()
         self.k = k
 
-    def run(self):  # наша функция(полезная работа), без всяких if pbNumber == 1:
+    def run(self):
         info_for_messages = vk.messages.getLongPollServer(need_pts=1)
         while True:
             updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'],

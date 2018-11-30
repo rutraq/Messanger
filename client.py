@@ -29,7 +29,7 @@ def send_message(domain_for_sending):
     vk.messages.send(domain=domain_for_sending, message=message)
 
 
-def get_message(vk):
+def get_message():
     info_for_messages = vk.messages.getLongPollServer(need_pts=1)
     while True:
         updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'], fields='domain')
