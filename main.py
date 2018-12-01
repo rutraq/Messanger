@@ -263,10 +263,9 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             (pubkey, privkey) = rsa.newkeys(512)
             key = pickle.dumps(pubkey)
             f = open("key.txt", "w")
-
             f.write(str(key))
             f.close()
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, key))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(key)))
             conn.commit()
         i = 0
         choose_friends = 0
