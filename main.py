@@ -12,8 +12,6 @@ import os
 import rsa
 from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
-import pickle
-import client
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -49,6 +47,7 @@ class MyThread(QThread):
                     domain_vk = updates['profiles'][0]['domain']
                     for domain in list_domain:
                         if domain == domain_vk:
+                            # vk.messages.markAsRead(peer_id=updates['messages']['items'][msg]['peer_id'])
                             if len(updates['profiles']) == 1:
                                 print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
@@ -261,8 +260,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         row = cur.fetchone()
         if not row:
             (pubkey, privkey) = rsa.newkeys(512)
-            key = pickle.dumps(pubkey)
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(key)))
+            print(type(pubkey))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
             conn.commit()
         i = 0
         choose_friends = 0
@@ -273,6 +272,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 if self.lineEdit.text() != '':
                     cur.execute("SELECT * FROM persons")
                     row = cur.fetchone()
+                    print(type(row[1]))
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
