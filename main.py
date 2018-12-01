@@ -13,6 +13,7 @@ import rsa
 from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
 import pickle
+import client
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -48,7 +49,6 @@ class MyThread(QThread):
                     domain_vk = updates['profiles'][0]['domain']
                     for domain in list_domain:
                         if domain == domain_vk:
-                            # vk.messages.markAsRead(peer_id=updates['messages']['items'][msg]['peer_id'])
                             if len(updates['profiles']) == 1:
                                 print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
