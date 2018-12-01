@@ -266,7 +266,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
 
             f.write(str(key))
             f.close()
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, key))
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(key)))
             conn.commit()
         i = 0
         choose_friends = 0
@@ -277,6 +277,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 if self.lineEdit.text() != '':
                     cur.execute("SELECT * FROM persons")
                     row = cur.fetchone()
+                    pubkey_bd = row[1]
+                    print(pubkey_bd)
                     vk.messages.send(message=self.lineEdit.text(), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
