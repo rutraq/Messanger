@@ -19,6 +19,7 @@ list_domain = []
 domains = []
 messages = []
 d = p = q = pubkey_bd = 1
+domain = ''
 
 
 def login_with_sql():
@@ -39,8 +40,13 @@ class MyThread(QThread):
         self.k = k
 
     def run(self):
-        global d, p, q, pubkey_bd
+        global d, p, q, pubkey_bd, domain
         info_for_messages = vk.messages.getLongPollServer(need_pts=1)
+        print(domain)
+        cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
+        row = cur.fetchone()
+        pubkey_bd = int(str(row[1])[10:164])
+        print(pubkey_bd)
         if os.path.isfile("key.txt"):
             f = open("key.txt")
             privkey_str = f.read()
@@ -174,7 +180,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_5.move(-500, 200)
 
     def load(self):
-        global d, p, q
+        global d, p, q, domain
         info = vk.account.getProfileInfo()
         name = info['first_name']
         surname = info['last_name']
