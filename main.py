@@ -71,6 +71,7 @@ class MyThread(QThread):
                                 ex = updates['messages']['items'][msg]['text']
                                 ex = str(ex).encode("UTF-8")
                                 print(pubkey_bd, d, p, q)
+                                print(ex)
                                 print(type(ex))
                                 ex = rsa.decrypt(ex, rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
                                 print(ex)
@@ -296,7 +297,8 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     row = cur.fetchone()
                     pubkey_bd = int(str(row[1])[10:164])
                     crypto = rsa.encrypt(self.lineEdit.text().encode('utf-8'), rsa.PublicKey(pubkey_bd, 65537))
-                    vk.messages.send(message=crypto, domain=list_domain[i])
+                    print(crypto)
+                    vk.messages.send(message=str(crypto), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
