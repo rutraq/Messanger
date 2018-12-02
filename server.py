@@ -13,13 +13,19 @@ print(type(message))
 key = int(key_a)
 crypto = rsa.encrypt(message, rsa.PublicKey(key, 65537)) #n e
 print(crypto)
+crypto = str(crypto)
+print(crypto)
+print(type(crypto))
+crypto = str(crypto).encode('utf-8')
+print(crypto)
+print(type(crypto))
 d = privkey_str[174:328]
 d = int(d)
 p = privkey_str[330:412]
 p = int(p)
 q = privkey_str[414:487]
 q = int(q)
-message = rsa.decrypt(crypto, rsa.PrivateKey(key, 65537, d, p, q)) # n e d p q
-print(message)
+inf = rsa.decrypt(crypto, rsa.PrivateKey(key, 65537, d, p, q)) # n e d p q
+print(inf)
 
 
