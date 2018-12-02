@@ -17,15 +17,16 @@ crypto = str(crypto)
 print(crypto)
 print(type(crypto))
 crypto = str(crypto).encode('utf-8')
-print(crypto)
+print(crypto[2:-1])
+i = 0
+new = str(crypto)
 print(type(crypto))
-d = privkey_str[174:328]
-d = int(d)
-p = privkey_str[330:412]
-p = int(p)
-q = privkey_str[414:487]
-q = int(q)
-inf = rsa.decrypt(crypto, rsa.PrivateKey(key, 65537, d, p, q)) # n e d p q
-print(inf)
-
-
+print(new)
+# d = privkey_str[174:328]
+# d = int(d)
+# p = privkey_str[330:412]
+# p = int(p)
+# q = privkey_str[414:487]
+# q = int(q)
+# inf = rsa.decrypt(crypto, rsa.PrivateKey(key, 65537, d, p, q)) # n e d p q
+# print(inf)
