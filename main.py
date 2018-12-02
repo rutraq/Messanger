@@ -18,7 +18,7 @@ list_friends_surnames = []
 list_domain = []
 domains = []
 messages = []
-d = p = q = pubkey_bd = 1
+d = p = q = 1
 domain = ''
 
 
@@ -40,7 +40,7 @@ class MyThread(QThread):
         self.k = k
 
     def run(self):
-        global d, p, q, pubkey_bd, domain
+        global d, p, q, domain
         info_for_messages = vk.messages.getLongPollServer(need_pts=1)
         print(domain)
         cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
@@ -285,7 +285,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.plainTextEdit.setPlainText(text)
 
     def send(self):
-        global pubkey_bd
         i = 0
         choose_friends = 0
         text = ''
