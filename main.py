@@ -18,6 +18,7 @@ list_friends_surnames = []
 list_domain = []
 domains = []
 messages = []
+d = p = q = pubkey_bd = None
 
 
 def login_with_sql():
@@ -38,6 +39,7 @@ class MyThread(QThread):
         self.k = k
 
     def run(self):
+        global pubkey_bd
         info_for_messages = vk.messages.getLongPollServer(need_pts=1)
         while True:
             updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'],
@@ -54,6 +56,8 @@ class MyThread(QThread):
                                 messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
+                                str(ex).encode("UTF-8")
+                                ex = rsa.decrypt(ex, rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
                                 self.progress.emit(ex)
                             elif len(updates['profiles']) == 2:
                                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1][
@@ -160,6 +164,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_5.move(-500, 200)
 
     def load(self):
+        global d, p, q
         info = vk.account.getProfileInfo()
         name = info['first_name']
         surname = info['last_name']
@@ -179,6 +184,10 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             (pubkey, privkey) = rsa.newkeys(512)
             cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
             conn.commit()
+            privkey_str = str(privkey)
+            d = int(privkey_str[174:328])
+            p = int(privkey_str[330:412])
+            q = int(privkey_str[414:487])
             f = open("key.txt", "w")
             f.write(str(privkey))
             f.close()
@@ -264,6 +273,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.plainTextEdit.setPlainText(text)
 
     def send(self):
+        global pubkey_bd
         i = 0
         choose_friends = 0
         text = ''
@@ -273,8 +283,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                 if self.lineEdit.text() != '':
                     cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + list_domain[i] + "' ")
                     row = cur.fetchone()
-                    pubkey_bd = str(row[1])[10:164]
-                    pubkey_bd = int(pubkey_bd)
+                    pubkey_bd = int(str(row[1])[10:164])
                     crypto = rsa.encrypt(self.lineEdit.text().encode('utf-8'), rsa.PublicKey(pubkey_bd, 65537))
                     vk.messages.send(message=crypto, domain=list_domain[i])
                     messages.append("Я:")
