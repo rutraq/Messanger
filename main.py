@@ -173,6 +173,16 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                         (domain, name, surname))  # Добавление информации
             conn.commit()
 
+        cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
+        row = cur.fetchone()
+        if not row:
+            (pubkey, privkey) = rsa.newkeys(512)
+            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
+            conn.commit()
+            f = open("key.txt", "w")
+            f.write(str(privkey))
+            f.close()
+
         cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
         name_button = str(row[2])
@@ -254,14 +264,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.plainTextEdit.setPlainText(text)
 
     def send(self):
-        info = vk.account.getProfileInfo()
-        domain = info['screen_name']
-        cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
-        row = cur.fetchone()
-        if not row:
-            (pubkey, privkey) = rsa.newkeys(512)
-            cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
-            conn.commit()
         i = 0
         choose_friends = 0
         text = ''
