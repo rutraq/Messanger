@@ -4,7 +4,11 @@ print(privkey)
 privkey_str = str(privkey)
 key_str = str(pubkey)
 key_a = key_str[10:164]
-message = b'Hello Blablacode.ru!'
+message = str(input('Message : ')).encode('utf-8')
+message = str(message)
+print(type(message))
+message = str(message).encode('utf-8')
+print(type(message))
 # шифруем
 key = int(key_a)
 crypto = rsa.encrypt(message, rsa.PublicKey(key, 65537)) #n e
