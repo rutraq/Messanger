@@ -4,9 +4,9 @@ print(privkey)
 privkey_str = str(privkey)
 key_str = str(pubkey)
 key_a = key_str[10:164]
-message = str(input('Message : ')).encode('utf-8')
-message = str(message)
+message = input("Message: ")
 print(type(message))
+message = message[2:-1]
 message = str(message).encode('utf-8')
 print(type(message))
 # шифруем
@@ -16,12 +16,10 @@ print(crypto)
 crypto = str(crypto)
 print(crypto)
 print(type(crypto))
-crypto = str(crypto).encode('utf-8')
-print(crypto[2:-1])
-i = 0
-new = str(crypto)
+crypto = crypto[2:-1]
+crypto = crypto.encode('utf-8')
+print(crypto)
 print(type(crypto))
-print(new)
 # d = privkey_str[174:328]
 # d = int(d)
 # p = privkey_str[330:412]
