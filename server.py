@@ -14,12 +14,13 @@ key = int(key_a)
 crypto = rsa.encrypt(message, rsa.PublicKey(key, 65537)) #n e
 print(crypto)
 crypto = str(crypto)
+crypto = crypto[2:-1]
 print(crypto)
 print(type(crypto))
-crypto = crypto[2:-1]
 crypto = crypto.encode('utf-8')
 print(crypto)
 print(type(crypto))
+print("Вывод")
 # d = privkey_str[174:328]
 # d = int(d)
 # p = privkey_str[330:412]
