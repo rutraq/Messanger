@@ -6,7 +6,7 @@ key_str = str(pubkey)
 key_a = key_str[10:164]
 message = input("Message: ")
 print(type(message))
-message = message[2:-1]
+print(message)
 message = str(message).encode('utf-8')
 print(type(message))
 # шифруем
@@ -14,10 +14,10 @@ key = int(key_a)
 crypto = rsa.encrypt(message, rsa.PublicKey(key, 65537)) #n e
 print(crypto)
 crypto = str(crypto)
-crypto = crypto[2:-1]
-print(crypto)
+crypto = crypto[2:-1].encode('utf-8').decode('unicode-escape')
+print("this " + crypto)
 print(type(crypto))
-crypto = crypto.encode('utf-8')
+crypto = crypto.encode('unicode-escape')
 print(crypto)
 print(type(crypto))
 print("Вывод")
