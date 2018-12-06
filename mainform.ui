@@ -608,6 +608,22 @@ background-color: rgb(23, 33, 43);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QPushButton" name="Create_buttons">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>477</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Создать кнопки</string>
+   </property>
+  </widget>
   <zorder>label_6</zorder>
   <zorder>listView</zorder>
   <zorder>plainTextEdit</zorder>
@@ -625,6 +641,7 @@ background-color: rgb(23, 33, 43);</string>
   <zorder>label_3</zorder>
   <zorder>label_7</zorder>
   <zorder>label_8</zorder>
+  <zorder>Create_buttons</zorder>
  </widget>
  <resources>
   <include location="main_form.qrc"/>

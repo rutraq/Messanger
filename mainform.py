@@ -233,6 +233,10 @@ class Ui_Dialog(object):
         self.label_8.setText("")
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")
+        self.Create_buttons = QtWidgets.QPushButton(Dialog)
+        self.Create_buttons.setGeometry(QtCore.QRect(670, 477, 141, 51))
+        self.Create_buttons.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.Create_buttons.setObjectName("Create_buttons")
         self.label_6.raise_()
         self.listView.raise_()
         self.plainTextEdit.raise_()
@@ -250,6 +254,7 @@ class Ui_Dialog(object):
         self.label_3.raise_()
         self.label_7.raise_()
         self.label_8.raise_()
+        self.Create_buttons.raise_()
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -262,5 +267,6 @@ class Ui_Dialog(object):
         self.label_5.setText(_translate("Dialog", "Настройки"))
         self.label_6.setText(_translate("Dialog", "Выберите кому хотите написать"))
         self.label_7.setText(_translate("Dialog", "Vershion : Alpha"))
+        self.Create_buttons.setText(_translate("Dialog", "Создать кнопки"))
 
 import main_form_rc

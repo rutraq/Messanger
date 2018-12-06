@@ -15,9 +15,9 @@ crypto = rsa.encrypt(message, rsa.PublicKey(key, 65537)) #n e
 print(crypto)
 crypto = str(crypto)
 crypto = crypto[2:-1].encode('utf-8').decode('unicode-escape')
-print("this " + crypto)
+print(crypto)
 print(type(crypto))
-crypto = crypto.encode('unicode-escape')
+crypto = crypto.encode('unicode-escape'), "raw_unicode_escape"
 print(crypto)
 print(type(crypto))
 print("Вывод")

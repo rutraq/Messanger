@@ -12,6 +12,8 @@ import os
 import rsa
 from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
+import random
+import time
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -20,6 +22,7 @@ domains = []
 messages = []
 d = p = q = 1
 domain = ''
+checka = 0
 
 
 def login_with_sql():
@@ -144,6 +147,25 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.lineEdit.returnPressed.connect(self.send)
         self.load()
         self.design()
+        self.Create_buttons.clicked.connect(self.but)
+
+    def but(self):
+        global checka
+        checka += 1
+        if checka % 2 != 0:
+            self.Create_buttons.resize(self.Create_buttons.width(), 61)
+            self.Create_buttons.setStyleSheet('border-radius: 30px; background-color: rgb(255, 255, 255);')
+        else:
+            self.Create_buttons.resize(self.Create_buttons.width(), 51)
+            self.Create_buttons.setStyleSheet('border-radius: 0px; background-color: rgb(255, 255, 255);')
+
+        for i in range(5):
+            check = QPushButton("New button", self)
+            check.resize(260, 20)
+            check.move(random.randint(1, 800), random.randint(1, 800))
+            check.setFont(QtGui.QFont("Times", 12, QtGui.QFont.Bold))
+            check.setStyleSheet('background-color: rgb(255, 255, 255);')
+            check.show()
 
     def click(self):
         info = vk.account.getProfileInfo()
