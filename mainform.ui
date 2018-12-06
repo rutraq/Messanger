@@ -481,7 +481,7 @@ background-image: url(:/newPrefix/photos/settings.png);</string>
     <rect>
      <x>-250</x>
      <y>200</y>
-     <width>171</width>
+     <width>101</width>
      <height>35</height>
     </rect>
    </property>
@@ -611,8 +611,8 @@ background-color: rgb(23, 33, 43);</string>
   <widget class="QPushButton" name="Create_buttons">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>477</y>
+     <x>820</x>
+     <y>620</y>
      <width>141</width>
      <height>51</height>
     </rect>
@@ -622,6 +622,58 @@ background-color: rgb(23, 33, 43);</string>
    </property>
    <property name="text">
     <string>Создать кнопки</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>200</y>
+     <width>181</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::StrongFocus</enum>
+   </property>
+   <property name="toolTipDuration">
+    <number>-1</number>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-image: url(:/newPrefix/photos/prozrach.png);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="autoRepeat">
+    <bool>false</bool>
+   </property>
+   <property name="autoExclusive">
+    <bool>false</bool>
+   </property>
+   <property name="autoDefault">
+    <bool>true</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
    </property>
   </widget>
   <zorder>label_6</zorder>
@@ -642,6 +694,7 @@ background-color: rgb(23, 33, 43);</string>
   <zorder>label_7</zorder>
   <zorder>label_8</zorder>
   <zorder>Create_buttons</zorder>
+  <zorder>pushButton_4</zorder>
  </widget>
  <resources>
   <include location="main_form.qrc"/>

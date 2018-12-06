@@ -7,7 +7,7 @@ key_a = key_str[10:164]
 message = input("Message: ")
 print(type(message))
 print(message)
-message = str(message).encode('utf-8')
+message = bytes(message, 'utf-8')
 print(type(message))
 # шифруем
 key = int(key_a)

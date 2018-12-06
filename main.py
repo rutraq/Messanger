@@ -148,6 +148,10 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.load()
         self.design()
         self.Create_buttons.clicked.connect(self.but)
+        self.pushButton_4.clicked.connect(self.settings)
+
+    def settings(self):
+        print("sos")
 
     def but(self):
         global checka
@@ -183,6 +187,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_7.move(10, 810)
         self.label_4.move(30, 200)
         self.label_5.move(80, 200)
+        self.pushButton_4.move(30, 200)
 
     def design(self):
         self.pushButton_2.setStyleSheet(
@@ -201,6 +206,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             btn.show()
         self.label_4.move(-500, 200)
         self.label_5.move(-500, 200)
+        self.pushButton_4.move(-250, 200)
 
     def load(self):
         global d, p, q, domain
