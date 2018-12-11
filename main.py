@@ -1,4 +1,4 @@
-from PyQt5 import Qt, QtGui
+from PyQt5 import Qt, QtGui, QtCore
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QPushButton, QRadioButton
 from PyQt5.QtGui import QPixmap, QIcon
@@ -147,29 +147,15 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.lineEdit.returnPressed.connect(self.send)
         self.load()
         self.design()
-        self.Create_buttons.clicked.connect(self.but)
         self.pushButton_4.clicked.connect(self.settings)
+
+    def keyPressEvent(self, e):
+        k = 0
+        if e.key() == Qt.Key_Escape:
+            self.close()
 
     def settings(self):
         print("sos")
-
-    def but(self):
-        global checka
-        checka += 1
-        if checka % 2 != 0:
-            self.Create_buttons.resize(self.Create_buttons.width(), 61)
-            self.Create_buttons.setStyleSheet('border-radius: 30px; background-color: rgb(255, 255, 255);')
-        else:
-            self.Create_buttons.resize(self.Create_buttons.width(), 51)
-            self.Create_buttons.setStyleSheet('border-radius: 0px; background-color: rgb(255, 255, 255);')
-
-        for i in range(5):
-            check = QPushButton("New button", self)
-            check.resize(260, 20)
-            check.move(random.randint(1, 800), random.randint(1, 800))
-            check.setFont(QtGui.QFont("Times", 12, QtGui.QFont.Bold))
-            check.setStyleSheet('background-color: rgb(255, 255, 255);')
-            check.show()
 
     def click(self):
         info = vk.account.getProfileInfo()
