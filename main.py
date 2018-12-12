@@ -23,6 +23,8 @@ messages = []
 d = p = q = 1
 domain = ''
 checka = 0
+delete_message = False
+last_message_for_delete = ''
 
 
 def login_with_sql():
@@ -150,9 +152,19 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.pushButton_4.clicked.connect(self.settings)
 
     def keyPressEvent(self, e):
-        k = 0
-        if e.key() == Qt.Key_Escape:
-            self.close()
+        global delete_message, last_message_for_delete, messages
+        if e.key() == 16777249:
+            delete_message = True
+        if (e.key() == 90 or e.key() == 1071) and delete_message:
+            if last_message_for_delete != '':
+                vk.messages.delete(message_ids=last_message_for_delete, delete_for_all=1)
+                last_message_for_delete = ''
+                del messages[-2:]
+                text = ''
+                for mess in messages:
+                    text += mess + "\n"
+                self.plainTextEdit.setPlainText(text)
+            delete_message = False
 
     def settings(self):
         print("sos")
@@ -300,6 +312,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.plainTextEdit.setPlainText(text)
 
     def send(self):
+        global last_message_for_delete
         i = 0
         choose_friends = 0
         text = ''
@@ -312,7 +325,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     pubkey_bd = int(str(row[1])[10:164])
                     crypto = rsa.encrypt(self.lineEdit.text().encode('utf-8'), rsa.PublicKey(pubkey_bd, 65537))
                     print(crypto)
-                    vk.messages.send(message=str(crypto), domain=list_domain[i])
+                    last_message_for_delete = vk.messages.send(message=str(crypto), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
                     self.lineEdit.setText('')
