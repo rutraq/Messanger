@@ -24,7 +24,7 @@
     <rect>
      <x>1150</x>
      <y>810</y>
-     <width>71</width>
+     <width>111</width>
      <height>51</height>
     </rect>
    </property>
@@ -230,6 +230,7 @@
    <property name="font">
     <font>
      <family>Times New Roman</family>
+     <pointsize>11</pointsize>
      <weight>75</weight>
      <bold>true</bold>
     </font>
@@ -282,7 +283,7 @@ background-color: rgb(14, 22, 33);</string>
     <rect>
      <x>1500</x>
      <y>810</y>
-     <width>721</width>
+     <width>681</width>
      <height>51</height>
     </rect>
    </property>

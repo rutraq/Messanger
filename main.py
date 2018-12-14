@@ -50,15 +50,15 @@ class MyThread(QThread):
         print(domain)
         cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
         row = cur.fetchone()
-        pubkey_bd = int(str(row[1])[10:164])
-        print(pubkey_bd)
-        if os.path.isfile("key.txt"):
-            f = open("key.txt")
-            privkey_str = f.read()
-            f.close()
-            d = int(privkey_str[174:328])
-            p = int(privkey_str[330:412])
-            q = int(privkey_str[414:487])
+        # pubkey_bd = int(str(row[1])[10:164])
+        # print(pubkey_bd)
+        # if os.path.isfile("key.txt"):
+        #     f = open("key.txt")
+        #     privkey_str = f.read()
+        #     f.close()
+        #     d = int(privkey_str[174:328])
+        #     p = int(privkey_str[330:412])
+        #     q = int(privkey_str[414:487])
         while True:
             updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'],
                                                      fields='domain')
@@ -74,13 +74,13 @@ class MyThread(QThread):
                                 messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
-                                ex = str(ex).encode("UTF-8")
-                                print(pubkey_bd, d, p, q)
-                                print(ex)
-                                print(type(ex))
-                                message = rsa.decrypt(ex, rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
-                                print(message)
-                                self.progress.emit(message)
+                                # ex = str(ex).encode("UTF-8")
+                                # print(pubkey_bd, d, p, q)
+                                # print(ex)
+                                # print(type(ex))
+                                # message = rsa.decrypt(ex, rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
+                                # print(message)
+                                self.progress.emit(ex)
                             elif len(updates['profiles']) == 2:
                                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1][
                                     'last_name'] + ":")
@@ -284,7 +284,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         self.label_6.setVisible(False)
         self.plainTextEdit.move(330, 40)
         self.lineEdit.move(330, 810)
-        self.pushButton.move(1050, 810)
+        self.pushButton.move(1010, 810)
         self.label_8.move(330, 0)
         self.choosen_friend()
 
