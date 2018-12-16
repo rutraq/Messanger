@@ -14,6 +14,7 @@ from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
 import random
 import time
+import ast
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -50,15 +51,15 @@ class MyThread(QThread):
         print(domain)
         cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
         row = cur.fetchone()
-        # pubkey_bd = int(str(row[1])[10:164])
-        # print(pubkey_bd)
-        # if os.path.isfile("key.txt"):
-        #     f = open("key.txt")
-        #     privkey_str = f.read()
-        #     f.close()
-        #     d = int(privkey_str[174:328])
-        #     p = int(privkey_str[330:412])
-        #     q = int(privkey_str[414:487])
+        pubkey_bd = int(str(row[1])[10:164])
+        print(pubkey_bd)
+        if os.path.isfile("key.txt"):
+            f = open("key.txt")
+            privkey_str = f.read()
+            f.close()
+            d = int(privkey_str[174:328])
+            p = int(privkey_str[330:412])
+            q = int(privkey_str[414:487])
         while True:
             updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'],
                                                      fields='domain')
@@ -74,12 +75,12 @@ class MyThread(QThread):
                                 messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
-                                # ex = str(ex).encode("UTF-8")
-                                # print(pubkey_bd, d, p, q)
-                                # print(ex)
-                                # print(type(ex))
-                                # message = rsa.decrypt(ex, rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
-                                # print(message)
+                                ex = str(ex)
+                                print(pubkey_bd, d, p, q)
+                                print(ex)
+                                print(type(ex))
+                                message = rsa.decrypt(ast.literal_eval(str(ex)), rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
+                                print(message)
                                 self.progress.emit(ex)
                             elif len(updates['profiles']) == 2:
                                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1][
