@@ -79,9 +79,9 @@ class MyThread(QThread):
                                 print(pubkey_bd, d, p, q)
                                 print(ex)
                                 print(type(ex))
-                                message = rsa.decrypt(ast.literal_eval(str(ex)), rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
+                                message = str(rsa.decrypt(ast.literal_eval(str(ex)), rsa.PrivateKey(pubkey_bd, 65537, d, p, q)))[2:-1]
                                 print(message)
-                                self.progress.emit(ex)
+                                self.progress.emit(str(message))
                             elif len(updates['profiles']) == 2:
                                 print(updates['profiles'][1]['first_name'] + " " + updates['profiles'][1][
                                     'last_name'] + ":")
