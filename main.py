@@ -69,7 +69,9 @@ class MyThread(QThread):
                                 messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
-                                ex = str(ex).encode('unicode-escape').decode('utf-8')
+                                print(ex)
+                                ex = str(ex)
+                                print(ex)
                                 message = rsa.decrypt(ast.literal_eval(str(ex)), rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
                                 self.progress.emit(message.decode('UTF-8'))
                 info_for_messages = vk.messages.getLongPollServer(need_pts=1)
@@ -320,7 +322,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     pubkey_bd = int(str(row[1])[10:164])
                     message = mess_now.encode('utf-8')
                     crypto = rsa.encrypt(message, rsa.PublicKey(pubkey_bd, 65537))
-                    last_message_for_delete = vk.messages.send(message=str(crypto).encode('utf-8').decode('unicode-escape'), domain=list_domain[i])
+                    last_message_for_delete = vk.messages.send(message=str(crypto), domain=list_domain[i])
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
             i += 1
