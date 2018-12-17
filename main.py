@@ -12,8 +12,6 @@ import os
 import rsa
 from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
-import random
-import time
 import ast
 
 list_friends_buttons = []
@@ -48,11 +46,9 @@ class MyThread(QThread):
     def run(self):
         global d, p, q, domain
         info_for_messages = vk.messages.getLongPollServer(need_pts=1)
-        print(domain)
         cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
         row = cur.fetchone()
         pubkey_bd = int(str(row[1])[10:164])
-        print(pubkey_bd)
         if os.path.isfile("key.txt"):
             f = open("key.txt")
             privkey_str = f.read()
@@ -70,8 +66,6 @@ class MyThread(QThread):
                         if domain == domain_vk:
                             # vk.messages.markAsRead(peer_id=updates['messages']['items'][msg]['peer_id'])
                             if len(updates['profiles']) == 1:
-                                print(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
-                                    'last_name'] + ":")
                                 messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
@@ -326,7 +320,6 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
                     pubkey_bd = int(str(row[1])[10:164])
                     message = self.lineEdit.text().encode('utf-8')
                     crypto = rsa.encrypt(message, rsa.PublicKey(pubkey_bd, 65537))
-                    print(crypto)
                     last_message_for_delete = vk.messages.send(message=str(crypto), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
