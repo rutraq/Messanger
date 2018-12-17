@@ -13,6 +13,8 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.setWindowModality(QtCore.Qt.NonModal)
         Dialog.resize(1122, 859)
+        Dialog.setMinimumSize(QtCore.QSize(1122, 859))
+        Dialog.setMaximumSize(QtCore.QSize(1122, 859))
         Dialog.setStyleSheet("background-color: rgb(14, 22, 33);")
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(1150, 810, 111, 51))
