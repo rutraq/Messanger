@@ -303,22 +303,24 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
         i = 0
         choose_friends = 0
         text = ''
+        mess_now = ''
         for check in list_friends_buttons:
             if check.isChecked():
                 choose_friends = i
                 if self.lineEdit.text() != '':
-                    cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + list_domain[i] + "' ")
-                    row = cur.fetchone()
-                    pubkey_bd = int(str(row[1])[10:164])
-                    message = self.lineEdit.text().encode('utf-8')
-                    crypto = rsa.encrypt(message, rsa.PublicKey(pubkey_bd, 65537))
-                    last_message_for_delete = vk.messages.send(message=str(crypto), domain=list_domain[i])
                     messages.append("Я:")
                     messages.append(self.lineEdit.text())
+                    mess_now = self.lineEdit.text()
                     self.lineEdit.setText('')
                     for mess in messages:
                         text += mess + "\n"
                     self.plainTextEdit.setPlainText(text)
+                    cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + list_domain[i] + "' ")
+                    row = cur.fetchone()
+                    pubkey_bd = int(str(row[1])[10:164])
+                    message = mess_now.encode('utf-8')
+                    crypto = rsa.encrypt(message, rsa.PublicKey(pubkey_bd, 65537))
+                    last_message_for_delete = vk.messages.send(message=str(crypto), domain=list_domain[i])
                 else:
                     msgbox(msg="Enter a message", title="ERROR")
             i += 1
