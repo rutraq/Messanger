@@ -69,9 +69,7 @@ class MyThread(QThread):
                                 messages.append(updates['profiles'][0]['first_name'] + " " + updates['profiles'][0][
                                     'last_name'] + ":")
                                 ex = updates['messages']['items'][msg]['text']
-                                print(ex)
                                 ex = str(ex)
-                                print(ex)
                                 message = rsa.decrypt(ast.literal_eval(str(ex)), rsa.PrivateKey(pubkey_bd, 65537, d, p, q))
                                 self.progress.emit(message.decode('UTF-8'))
                 info_for_messages = vk.messages.getLongPollServer(need_pts=1)
