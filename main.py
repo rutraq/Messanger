@@ -13,6 +13,7 @@ import rsa
 from threading import Thread
 from PyQt5.QtCore import QThread, pyqtSignal
 import ast
+import time
 
 list_friends_buttons = []
 list_friends_surnames = []
@@ -38,13 +39,13 @@ def login_with_sql():
 
 def get_privkey():
     global d, p, q
-    if os.path.isfile("key.txt"):
-        f = open("key.txt")
-        privkey_str = f.read()
-        f.close()
-        d = int(privkey_str[174:328])
-        p = int(privkey_str[330:412])
-        q = int(privkey_str[414:487])
+    # if os.path.isfile("key.txt"):
+    f = open("key.txt")
+    privkey_str = f.read()
+    f.close()
+    d = int(privkey_str[174:328])
+    p = int(privkey_str[330:412])
+    q = int(privkey_str[414:487])
 
 
 class MyThread(QThread):
@@ -91,8 +92,6 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
 
     def load_form(self):
         os.startfile("decrypt.exe")
-        get_privkey()
-        os.startfile("encrypt.exe")
         if os.path.isfile("sign.txt"):
             f = open("sign.txt")
             telephone = f.read()
@@ -100,6 +99,8 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
             self.textEdit.setText(telephone)
             self.lineEdit.setText("11111111111")
             self.checkBox.setChecked(True)
+        get_privkey()
+        os.startfile("encrypt.exe")
 
     def login(self):
         global vk
