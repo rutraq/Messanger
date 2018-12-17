@@ -36,6 +36,17 @@ def login_with_sql():
         msgbox(msg="Отсутствует интернет соединение", title="Login", ok_button="fuck go back")
 
 
+def get_privkey():
+    global d, p, q
+    if os.path.isfile("key.txt"):
+        f = open("key.txt")
+        privkey_str = f.read()
+        f.close()
+        d = int(privkey_str[174:328])
+        p = int(privkey_str[330:412])
+        q = int(privkey_str[414:487])
+
+
 class MyThread(QThread):
     progress = pyqtSignal(str)
 
@@ -49,13 +60,6 @@ class MyThread(QThread):
         cur.execute("SELECT * FROM persons WHERE DOMAIN = '" + domain + "' ")
         row = cur.fetchone()
         pubkey_bd = int(str(row[1])[10:164])
-        if os.path.isfile("key.txt"):
-            f = open("key.txt")
-            privkey_str = f.read()
-            f.close()
-            d = int(privkey_str[174:328])
-            p = int(privkey_str[330:412])
-            q = int(privkey_str[414:487])
         while True:
             updates = vk.messages.getLongPollHistory(ts=info_for_messages['ts'], pts=info_for_messages['pts'],
                                                      fields='domain')
@@ -86,6 +90,9 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.load_form()
 
     def load_form(self):
+        os.startfile("decrypt.exe")
+        get_privkey()
+        os.startfile("encrypt.exe")
         if os.path.isfile("sign.txt"):
             f = open("sign.txt")
             telephone = f.read()
