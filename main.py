@@ -39,7 +39,7 @@ def login_with_sql():
 
 
 class MyThread(QThread):
-    progress = pyqtSignal(str)  # сигнал который мы будем передавать прогрессбару
+    progress = pyqtSignal(str)
 
     def __init__(self, k):
         super().__init__()
