@@ -1,19 +1,5 @@
-# import rsa
-# import ast
-# (pubkey, privkey) = rsa.newkeys(512)
-# message = str('Соси писос').encode('UTF-8')
-#
-# # шифруем
-# crypto = rsa.encrypt(message, pubkey)
-# print('Crypto :', crypto)
-# message = rsa.decrypt(ast.literal_eval(str(crypto)), privkey)
-# print('Message :', message)
-import rsa
+import vk_api
 
-pub_key, pr_key = rsa.newkeys(512)
-message = 'привет'.encode('utf8')
-# message = b'допустим этот?'
-crypto = rsa.encrypt(message, pub_key)
-print(crypto)
-message = rsa.decrypt(crypto, pr_key)
-print(message.decode('UTF-8'))
+vk_session = vk_api.VkApi(token='209295912aeab32b85fe25c0fdcd843fe8cb5fd7901186b44804c702d5c883faf31863f9ba3329999d964')
+vk_session.auth()
+vk = vk_session.get_api()

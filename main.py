@@ -100,8 +100,9 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
             self.textEdit.setText(telephone)
             self.lineEdit.setText("11111111111")
             self.checkBox.setChecked(True)
-        get_privkey()
-        os.startfile("encrypt.exe")
+        if os.path.isfile('key.txt'):
+            get_privkey()
+            os.startfile("encrypt.exe")
 
     def login(self):
         global vk
@@ -226,6 +227,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             f = open("key.txt", "w")
             f.write(str(privkey))
             f.close()
+            get_privkey()
 
         cur.execute("SELECT * FROM users WHERE DOMAIN != '" + domain + "' ")
         row = cur.fetchone()
