@@ -91,7 +91,8 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.load_form()
 
     def load_form(self):
-        os.startfile("decrypt.exe")
+        if os.path.isfile("key.key"):
+            os.startfile("decrypt.exe")
         if os.path.isfile("sign.txt"):
             f = open("sign.txt")
             telephone = f.read()
