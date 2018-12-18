@@ -25,6 +25,7 @@ domain = ''
 checka = 0
 delete_message = False
 last_message_for_delete = ''
+path = os.getcwd()
 
 
 def login_with_sql():
@@ -40,7 +41,7 @@ def login_with_sql():
 def get_privkey():
     global d, p, q
     # if os.path.isfile("key.txt"):
-    f = open("key.txt")
+    f = open(path + "\key.txt")
     privkey_str = f.read()
     f.close()
     d = int(privkey_str[174:328])
@@ -91,18 +92,18 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
         self.load_form()
 
     def load_form(self):
-        if os.path.isfile("key.key"):
-            os.startfile("decrypt.exe")
-        if os.path.isfile("sign.txt"):
-            f = open("sign.txt")
+        if os.path.isfile(path + "\key.key"):
+            os.startfile(path + "\decrypt.exe")
+        if os.path.isfile(path + "\sign.txt"):
+            f = open(path + "\sign.txt")
             telephone = f.read()
             f.close()
             self.textEdit.setText(telephone)
             self.lineEdit.setText("11111111111")
             self.checkBox.setChecked(True)
-        if os.path.isfile('key.txt'):
+        if os.path.isfile(path + '\key.txt'):
             get_privkey()
-            os.startfile("encrypt.exe")
+            os.startfile(path + "\encrypt.exe")
 
     def login(self):
         global vk
@@ -118,13 +119,13 @@ class Loginform(QtWidgets.QMainWindow, design.Ui_Dialog):
                 self.mainform.show()
                 self.hide()
                 if self.checkBox.isChecked():
-                    f = open("sign.txt", "w")
+                    f = open(path + "\sign.txt", "w")
                     f.write(str(self.textEdit.toPlainText()))
                     f.close()
                 else:
-                    os.remove("vk_config.v2.json")
-                    if os.path.isfile("sign.txt"):
-                        os.remove("sign.txt")
+                    os.remove(path + "\\vk_config.v2.json")
+                    if os.path.isfile(path + "\sign.txt"):
+                        os.remove(path + "\sign.txt")
         except vk_api.exceptions.BadPassword:
             msgbox(msg="Введён неверный логин или пароль", title="Login", ok_button="fuck go back")
             self.lineEdit.setText('')
@@ -224,7 +225,7 @@ class Mainform(QtWidgets.QMainWindow, mainform.Ui_Dialog):
             (pubkey, privkey) = rsa.newkeys(512)
             cur.execute("INSERT INTO persons (domain, key ) VALUES (%s,%s)", (domain, str(pubkey)))
             conn.commit()
-            f = open("key.txt", "w")
+            f = open(path + "\key.txt", "w")
             f.write(str(privkey))
             f.close()
             get_privkey()

@@ -1,5 +1,6 @@
-import vk_api
+import os
 
-vk_session = vk_api.VkApi(token='209295912aeab32b85fe25c0fdcd843fe8cb5fd7901186b44804c702d5c883faf31863f9ba3329999d964')
-vk_session.auth()
-vk = vk_session.get_api()
+path = 'C:\Program Files (x86)'
+# path = path.replace('\\', '/')
+print(path)
+os.mkdir(path + "\Povistochka files")
